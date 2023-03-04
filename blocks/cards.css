@@ -3,13 +3,14 @@
   width: 100%;
   max-width: 880px;
   margin: 0 auto;
+  border-radius: 10px;
 }
 
 .card__list {
   display: grid;
   grid-template-columns: repeat(auto-fit, 282px);
   list-style-type: none;
-  grid-gap: 17px 20px;
+  grid-gap: 20px 17px;
   justify-content: center;
   margin: 0;
   padding: 0;
