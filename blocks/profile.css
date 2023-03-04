@@ -95,16 +95,16 @@
   opacity: 0.6;
 }
 
-@media screen and (max-width: 879px) {
+@media screen and (max-width: 870px) {
   .profile {
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
   }
 
   .profile__buttons-add {
-    margin: 0;
-    padding: 17px 133px 17px;
+    margin: 0px 20px 25px 25px;
+    width: 150px;
   }
 
   .profile__paragraph {
@@ -117,8 +117,9 @@
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 400px) {
   .profile {
+    flex-direction: column;
     margin: 42px 0 36px;
   }
 
@@ -138,7 +139,7 @@
     font-family: "Inter", sans-serif;
     font-size: 14px;
     line-height: 1.2;
-    text-align: center;
+    align-content: center;
   }
 
   .profile__buttons-edit {
@@ -148,12 +149,16 @@
     justify-content: center;
     align-items: center;
     margin-top: 26.25px;
+    height: 18px;
+    width: 18px;
   }
 
   .profile__buttons-add {
     margin: 0 19px 0;
     padding: 0;
     max-width: 282px;
+    width: 282px;
+    height: 50px;
   }
 
   .profile__buttons_edit-icon {

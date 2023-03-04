@@ -6,3 +6,15 @@
   margin-left: 200px;
   margin-right: 200px;
 }
+
+@media screen and (max-width: 890px) {
+  .body__content {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .body__content {
+    margin: 0;
+  }
+}
