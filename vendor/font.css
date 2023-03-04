@@ -3,8 +3,8 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("../Inter-Regular.oft") format("oft"),
-    url("../Inter-Regular.oft") format("oft");
+  src: url("./fonts/Inter-Regular.oft") format("oft"),
+    url("./fonts/Inter-Regular.oft") format("oft");
 }
 
 @font-face {
@@ -12,8 +12,8 @@
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url("../Inter-Medium.oft") format("oft"),
-    url("../Inter-Medium.oft") format("oft");
+  src: url("./fonts/Inter-Medium.oft") format("oft"),
+    url("./fonts/Inter-Medium.oft") format("oft");
 }
 
 @font-face {
@@ -21,6 +21,6 @@
   font-style: normal;
   font-weight: 900;
   font-display: swap;
-  src: url("../Inter-Black.oft") format("oft"),
-    url("../Inter-Black.oft") format("oft");
+  src: url("./fonts/Inter-Black.oft") format("oft"),
+    url("./fonts/Inter-Black.oft") format("oft");
 }
