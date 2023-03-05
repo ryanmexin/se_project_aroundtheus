@@ -13,7 +13,8 @@
 
 .card__description {
   display: flex;
-  font-family: "Inter black", sans-serif;
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
   background-color: white;
   color: black;
   align-items: center;

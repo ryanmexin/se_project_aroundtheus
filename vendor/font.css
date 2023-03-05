@@ -1,5 +1,5 @@
 @font-face {
-  font-family: "Inter Regular";
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -7,7 +7,7 @@
 }
 
 @font-face {
-  font-family: "Inter Medium";
+  font-family: "Inter";
   font-style: normal;
   font-weight: 500;
   font-display: swap;
@@ -15,7 +15,7 @@
 }
 
 @font-face {
-  font-family: "Inter Black";
+  font-family: "Inter";
   font-style: normal;
   font-weight: 900;
   font-display: swap;

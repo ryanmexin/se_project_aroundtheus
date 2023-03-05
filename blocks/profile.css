@@ -23,7 +23,7 @@
 
 .profile__title {
   margin: 0 0 0 3.75px;
-  font-family: "Inter Medium", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 42px;
   font-weight: 500;
   line-height: 1.15;
@@ -33,13 +33,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  max-width: 373px;
 }
 
 .profile__subtitle {
   margin: 16px 0 0 3.75px;
   padding: 0;
   align-self: flex-end;
-  font-family: "Inter Regular", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.2;
@@ -49,6 +50,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  max-width: 373px;
 }
 
 .profile__buttons {
@@ -115,7 +117,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 650px) {
   .profile {
     flex-direction: column;
     margin: 42px 0 36px;
@@ -131,12 +133,14 @@
     text-align: center;
     margin-top: 26.25px;
     margin-left: 10px;
+    max-width: 196px;
   }
 
   .profile__subtitle {
     font-size: 14px;
     line-height: 1.2;
     align-content: center;
+    max-width: 282px;
   }
 
   .profile__buttons-edit {
@@ -151,7 +155,7 @@
   }
 
   .profile__buttons-add {
-    margin: 0 19px 0;
+    margin: 0 15px 0;
     padding: 0;
     max-width: 282px;
     width: 282px;
