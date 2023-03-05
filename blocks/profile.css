@@ -97,9 +97,7 @@
 
 @media screen and (max-width: 870px) {
   .profile {
-    flex-direction: row;
     justify-content: center;
-    align-items: center;
   }
 
   .profile__buttons-add {
@@ -136,7 +134,6 @@
   }
 
   .profile__subtitle {
-    font-family: "Inter", sans-serif;
     font-size: 14px;
     line-height: 1.2;
     align-content: center;

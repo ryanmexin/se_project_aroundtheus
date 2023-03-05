@@ -28,10 +28,12 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .card__like-button {
-  background: transparent url(../images/heart.jpg) center no-repeat;
+  background: transparent url(../images/vectors/heart.svg) center no-repeat;
   width: 21px;
   height: 18px;
   border: none;
