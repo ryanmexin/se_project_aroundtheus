@@ -91,6 +91,7 @@
   justify-content: center;
   margin-left: auto;
   background-color: rgba(255, 255, 255, 0);
+  margin-bottom: 20px;
 }
 
 .profile__buttons-add:hover {
@@ -99,11 +100,11 @@
 
 @media screen and (max-width: 870px) {
   .profile {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .profile__buttons-add {
-    margin: 0px 20px 25px 25px;
+    margin: 0px 20px 50px 25px;
     width: 150px;
   }
 
@@ -117,7 +118,7 @@
   }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
   .profile {
     flex-direction: column;
     margin: 42px 0 36px;
@@ -171,5 +172,11 @@
     width: 16px;
     height: 16px;
     margin: 17px 133px 17px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profile__subtitle {
+    align-content: center;
   }
 }
