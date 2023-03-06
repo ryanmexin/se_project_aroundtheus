@@ -113,7 +113,6 @@
   }
 
   .profile__subtitle {
-    justify-self: center;
     margin-bottom: 36px;
   }
 }
@@ -138,9 +137,10 @@
   }
 
   .profile__subtitle {
+    display: flex;
     font-size: 14px;
     line-height: 1.2;
-    align-content: center;
+    justify-content: center;
     max-width: 282px;
   }
 
