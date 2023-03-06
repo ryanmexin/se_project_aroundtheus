@@ -9,12 +9,20 @@
 **Intro**
 
 This is the start of our Around the World Project for sprint three that will carry over to the next sprints. We will be using a design from Figma and learning how to build it based on that.
+Some technologies used
+
+- Grid containers
+- Flex-Box containers
+- Responsive design
+- HTML
+- CSS
+- Figma Design
 
 **Figma**
 
 - [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
 
-- [Link to my project on Github](https://github.com/ryanmexin/se_project_aroundtheus.git)
+- [Link to my project on Github](https://ryanmexin.github.io/se_project_aroundtheus/)
 
 **Images**
 

@@ -100,7 +100,7 @@
 
 @media screen and (max-width: 870px) {
   .profile {
-    justify-content: flex-start;
+    justify-content: space-between;
   }
 
   .profile__buttons-add {
@@ -137,10 +137,9 @@
   }
 
   .profile__subtitle {
-    display: flex;
     font-size: 14px;
     line-height: 1.2;
-    justify-content: center;
+    margin: 14px auto 36px auto;
     max-width: 282px;
   }
 
