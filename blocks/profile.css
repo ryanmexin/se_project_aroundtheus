@@ -98,7 +98,7 @@
   opacity: 0.6;
 }
 
-@media screen and (max-width: 870px) {
+@media screen and (max-width: 900px) {
   .profile {
     justify-content: space-between;
   }
@@ -127,6 +127,10 @@
     margin: 0;
     justify-self: center;
   }
+  .profile__paragraph {
+    grid-template-columns: minmax(auto, 196px) minmax(auto, 18px);
+  }
+
   .profile__title {
     font-size: 22px;
     line-height: 1.2;
@@ -141,7 +145,7 @@
     font-size: 14px;
     line-height: 1.2;
     margin: 14px auto 36px auto;
-    max-width: 282px;
+    max-width: 200px;
   }
 
   .profile__buttons-edit {
