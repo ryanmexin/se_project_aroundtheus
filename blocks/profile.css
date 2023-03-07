@@ -117,7 +117,7 @@
   }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 780px) {
   .profile {
     flex-direction: column;
     margin: 42px 0 36px;
@@ -134,6 +134,7 @@
     margin-top: 26.25px;
     margin-left: 10px;
     max-width: 196px;
+    justify-self: center;
   }
 
   .profile__subtitle {
@@ -175,6 +176,10 @@
 }
 
 @media screen and (max-width: 400px) {
+  .profile__title {
+    justify-self: center;
+  }
+
   .profile__subtitle {
     align-content: center;
   }
