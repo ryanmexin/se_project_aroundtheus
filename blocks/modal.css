@@ -1,0 +1,128 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  padding: 0 19px;
+  display: none;
+}
+
+.modal_opened {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__container {
+  position: relative;
+  background-color: white;
+  padding: 36px;
+  border-radius: 10px;
+  width: 358px;
+}
+
+.modal__close {
+  border: none;
+  position: absolute;
+  top: -45px;
+  right: -45px;
+  width: 40px;
+  height: 40px;
+  background-color: black;
+  background-image: url("../images/vectors/close.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.modal__close:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.modal__heading {
+  max-width: 330px;
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 22px;
+  margin-top: 0;
+  margin-bottom: 54px;
+}
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.model__form-input {
+  height: 27px;
+  margin-bottom: 30px;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid #000;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.94px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.model__form-input:last-of-type {
+  margin-bottom: 0;
+}
+
+.modal__form-input::placeholder {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.94px;
+  color: black;
+}
+
+.modal__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21.78px;
+  margin-top: 48px;
+  max-width: 358px;
+  height: 50.15px;
+  width: 430px;
+}
+
+.modal__button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+  .modal__container {
+    width: 252px;
+    padding: 25px 22px 25px 22px;
+  }
+
+  .modal__close {
+    width: 26px;
+    height: 26px;
+    right: 0px;
+  }
+
+  .modal__heading {
+    width: 238px;
+    margin-bottom: 75px;
+    font-size: 18px;
+  }
+
+  .modal__button {
+    width: 238px;
+  }
+}
