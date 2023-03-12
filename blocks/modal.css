@@ -57,12 +57,12 @@
   justify-content: center;
 }
 
-.model__form-input {
+.modal__form-input {
   height: 27px;
   margin-bottom: 30px;
   padding: 0;
   border: none;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   font-family: "Inter", sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -71,11 +71,11 @@
   text-align: left;
 }
 
-.model__form-input:last-of-type {
+.modal__form-input:last-of-type {
   margin-bottom: 0;
 }
 
-.modal__form-input::placeholder {
+.modal__form-input::-webkit-input-placeholder {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 14px;
