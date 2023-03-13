@@ -22,7 +22,7 @@
                 <img src="./images/jacques-cousteau.jpg" alt="Jacques Cousteau" class="profile__image" />
                 <div class="profile__paragraph">
                     <h1 class="profile__title">Jacques Cousteau</h1>
-                    <button class="profile__buttons-edit" type="button">
+                    <button class="profile__buttons-edit" Id="profile-edit-button" type="button">
                         <img class="profile__buttons-edit-icon" src="./images/vectors/pen.svg" alt="Edit Profile">
                     </button>
                     <p class="profile__subtitle">Explorer</p>
@@ -83,9 +83,9 @@
         <p class=" footer__text">@2023 Around the U.S.</p>
     </footer>
 
-    <div class="modal">
+    <div class="modal" id="profile-edit-modal">
         <div class="modal__container">
-            <button class="modal__close"></button>
+            <button class="modal__close" id="profile-modal-close-btn"></button>
             <p class="modal__heading">Edit profile</p>
             <form class="modal__form">
                 <input class="modal__form-input" type="text" name="title" placeholder="Jacques Cousteau">
