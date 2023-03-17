@@ -8,12 +8,12 @@
   z-index: 999;
   padding: 0 19px;
   display: none;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal_opened {
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .modal__container {
