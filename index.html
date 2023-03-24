@@ -39,7 +39,7 @@
     <footer class="footer">
         <p class=" footer__text">@2023 Around the U.S.</p>
     </footer>
-
+    <!--Edit Profile Modal-->
     <div class="modal" id="profile-edit-modal">
         <div class="modal__container">
             <button class="modal__close" id="profile-modal-close-btn"></button>
@@ -48,6 +48,20 @@
                 <input class="modal__form-input" type="text" name="title" id="profile-title-input" placeholder="Name">
                 <input class="modal__form-input" type="text" name="subtitle" id="profile-description-input"
                     placeholder="About">
+                <button class="modal__button">Save</button>
+
+            </form>
+        </div>
+    </div>
+    <!--Add Card Modal-->
+    <div class="modal" id="add-card-modal">
+        <div class="modal__container">
+            <button class="modal__close" id="add-card-modal-close-btn"></button>
+            <h2 class="modal__heading">New Place</h2>
+            <form class="modal__form" id="add-card-form">
+                <input class="modal__form-input modal__form-type-title" type="text" name="title" id="profile-title-input" placeholder="Title">
+                <input class="modal__form-input modal__form-type-url" type="text" name="url" id="profile-description-input"
+                    placeholder="Image URL">
                 <button class="modal__button">Save</button>
 
             </form>
