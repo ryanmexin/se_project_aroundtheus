@@ -51,37 +51,65 @@ const cardTitleInput = addCardFormElement.querySelector(
 );
 const cardUrlInput = addCardFormElement.querySelector(".modal__form-type-url");
 
-
+const previewImageModal = document.querySelector("#preview-image-modal");
+const previewImage = previewImageModal.querySelector(".modal__image");
+const previewImageName = previewImageModal.querySelector(".modal__image-name");
+const previewImageCloseButton =
+  previewImageModal.querySelector(".modal__close");
 
 /*-------------------------------------------------*/
 /*                 functions                       */
 /*-------------------------------------------------*/
 
-function closePopup() {
-  profileEditModal.classList.remove("modal_opened");
+function closePopUp(modal) {
+  modal.classList.remove("modal_opened");
 }
 
-function closeAddModal() {
-  addCardModal.classList.remove("modal_opened");
+
+//function closeAddModal() {
+ // addCardModal.classList.remove("modal_opened");
+//}
+
+function openPopUp(modal) {
+  modal.classList.add("modal_opened");
 }
 
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
-const likeButton = cardElement.querySelector(".card__like-button");
+  const likeButton = cardElement.querySelector(".card__like-button");
+  const CardDeleteButton = cardElement.querySelector(".card__delete-button");
 
+  cardImageEl.addEventListener("click", () => {
+    previewImage.src = cardData.link;
+    previewImage.alt = cardData.name;
+    previewImageName.textContent = cardData.name;
+    openPopUp(previewImageModal);
+  });
 
+  // like button logic
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-buttton_active");
+  });
+  // delete button logic
+  CardDeleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
 
   cardImageEl.src = cardData.link;
   cardImageEl.alt = cardData.name;
   cardTitleEl.textContent = cardData.name;
   return cardElement;
 }
+
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
   cardListEl.prepend(getcardElement(cardData));
 }
+
+
+
 
 /*-------------------------------------------------*/
 /*                Event Handlers                   */
@@ -91,7 +119,7 @@ function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closePopup();
+  closePopUp(addCardModal);
 }
 
 function handleAddCardFormSubmit(e) {
@@ -102,9 +130,12 @@ function handleAddCardFormSubmit(e) {
     name,
     link,
   });
+
   cardListEl.prepend(cardElement);
-  closePopup(addCardModal);
+  closePopUp(addCardModal);
 }
+
+
 /*-------------------------------------------------*/
 /* Event Listeners (to display name and subtitle in modal)*/
 /*-------------------------------------------------*/
@@ -114,7 +145,8 @@ profileEditBtn.addEventListener("click", () => {
   profileEditModal.classList.add("modal_opened");
 });
 
-profileModalClose.addEventListener("click", closePopup);
+profileModalClose.addEventListener("click", () => 
+closePopUp(profileEditModal));
 // Form Listeners
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
@@ -124,7 +156,8 @@ addNewCardButton.addEventListener("click", () => {
   profileDescriptionInput.value = profileDescription.textContent;
   addCardModal.classList.add("modal_opened");
 });
-addCardModalClose.addEventListener("click", closeAddModal);
+addCardModalClose.addEventListener("click", () => 
+closePopUp(addCardModal));
 
 /*-------------------------------------------------*/
 /*        for each looping thought card array      */
@@ -134,10 +167,6 @@ initialCards.forEach((cardData) => {
   cardListEl.prepend(cardElement);
 });
 
-//like buttons
-const likeButtons = document.querySelectorAll(".card__like-button");
-likeButtons.forEach((likeButton) => {
-likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle(".card__like-buttton_active");
-  });
+previewImageCloseButton.addEventListener("click", () => {
+  closePopUp(previewImageModal);
 });
