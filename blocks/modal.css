@@ -10,7 +10,8 @@
   visibility: hidden;
   align-items: center;
   justify-content: center;
-  transition:visibility 0s linear 0.5s,opacity 0.5s linear;
+  opacity: 0;
+  transition: opacity 0.5s ease, visibility 0s linear 0.5s;
   display: flex;
 }
 
@@ -20,7 +21,6 @@
   transition-delay: 0.3s;
   opacity: 1;
   pointer-events: auto;
-  
 }
 
 .modal__container {
@@ -46,7 +46,7 @@
   bottom: calc(100% + 5px);
   left: calc(100% + 5px);
   border: none;
-  background-color: transparent; 
+  background-color: transparent;
   background-size: contain;
   background: url("../images/vectors/close.svg") no-repeat;
   width: 40px;
@@ -54,7 +54,6 @@
   cursor: pointer;
   opacity: 1;
   transition: ease-in-out 0.3s;
-
 }
 
 .modal__close:hover {
@@ -134,6 +133,7 @@
     width: 26px;
     height: 26px;
     right: 0px;
+    transition: ease-in-out 0.3s;
   }
 
   .modal__heading {
@@ -146,7 +146,6 @@
     width: 238px;
   }
 }
-
 
 .modal__image {
   max-width: 75vw;
