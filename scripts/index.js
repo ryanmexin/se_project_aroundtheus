@@ -148,7 +148,6 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 // add new card
 addNewCardButton.addEventListener("click", () => {
-  profileDescriptionInput.value = profileDescription.textContent;
   openPopUp(addCardModal);
 });
 addCardModalClose.addEventListener("click", () => closePopUp(addCardModal));
