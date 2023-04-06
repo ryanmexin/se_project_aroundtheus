@@ -57,7 +57,7 @@ const previewImage = previewImageModal.querySelector(".modal__image");
 const previewImageName = previewImageModal.querySelector(".modal__image-name");
 const previewImageCloseButton =
   previewImageModal.querySelector(".modal__close");
-const escKeycode = 27;
+const ESC_KEYCODE = 27;
 
 /*-------------------------------------------------*/
 /*                 functions                       */
@@ -70,8 +70,15 @@ function closePopUp(modal) {
 
 function openPopUp(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", processEscDown);
+  document.removeEventListener("keydown", processEscDown);
 }
+const processEscDown = (evt) => {
+  if (evt.which === ESC_KEYCODE) {
+    const activeModal = document.querySelector("modal_opened");
+    closePopUp(activeModal);
+  }
+};
+
 
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -122,7 +129,7 @@ function handleAddCardFormSubmit(e) {
   e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
-  const cardElement = getCardElement({
+  getCardElement({
     name,
     link,
   });
@@ -141,7 +148,7 @@ profileEditBtn.addEventListener("click", () => {
   openPopUp(profileEditModal);
 });
 
-profileModalClose.addEventListener("click", () => closePopUp(profileEditModal));
+
 // Form Listeners
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
@@ -149,16 +156,13 @@ addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 addNewCardButton.addEventListener("click", () => {
   openPopUp(addCardModal);
 });
-addCardModalClose.addEventListener("click", () => closePopUp(addCardModal));
+
 
 /*-------------------------------------------------*/
 /*        for each looping thought card array      */
 /*-------------------------------------------------*/
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
-previewImageCloseButton.addEventListener("click", () => {
-  closePopUp(previewImageModal);
-});
 
 /*-------------------------------------------------*/
 /* closing Modal clicking anywhere outside it      */
@@ -168,18 +172,11 @@ function closeModalOnRemoteClick(evt) {
     evt.target === evt.currentTarget ||
     evt.target.classList.contains("modal__close")
   ) {
-    closePopUp(evt.target);
+    closePopUp(evt.currentTarget);
   }
 }
 profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
-
 addCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
 
 previewImageModal.addEventListener("mousedown", closeModalOnRemoteClick);
 
-const processEscDown = (evt) => {
-  if (evt.which === escKeycode) {
-    const activeModal = document.querySelector(".modal_opened");
-    closeModal(activeModal);
-  }
-};
