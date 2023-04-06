@@ -45,9 +45,12 @@
             <button class="modal__close" id="profile-modal-close-btn"></button>
             <h2 class="modal__heading">Edit profile</h2>
             <form class="modal__form">
-                <input class="modal__form-input" type="text" name="title" id="profile-title-input" placeholder="Name">
+                <input class="modal__form-input" type="text" name="title" id="profile-title-input" placeholder="Name"
+                    maxlength="40" minlength="2" required>
+                <span class="modal__error" id="profile-title-input-error"></span>
                 <input class="modal__form-input" type="text" name="subtitle" id="profile-description-input"
-                    placeholder="About">
+                    placeholder="About" maxlength="200" minlength="2" required>
+                <span class="modal__error" id="profile-description-input-error"></span>
                 <button class="modal__button">Save</button>
 
             </form>
@@ -69,8 +72,12 @@
             <button class="modal__close" id="add-card-modal-close-btn"></button>
             <h2 class="modal__heading">New Place</h2>
             <form class="modal__form" id="add-card-form">
-                <input class="modal__form-input modal__form-type-title" type="text" name="title" placeholder="Title">
-                <input class="modal__form-input modal__form-type-url" type="url" name="url" placeholder="Image URL">
+                <input class="modal__form-input" id="modal__form-type-title" type="text" name="title"
+                    placeholder="Title" maxlength="30" minlength="1" required>
+                <span class="modal__error" id="modal__form-type-title-error"></span>
+                <input class="modal__form-input" id="modal__form-type-url" type="url" name="url" placeholder="Image URL"
+                    required>
+                <span class="modal__error" id="modal__form-type-url-error"></span>
                 <button class="modal__button">Save</button>
 
             </form>
@@ -92,6 +99,7 @@
     </template>
 
     <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/validation.js" defer></script>
 </body>
 
 </html>

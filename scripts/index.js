@@ -48,15 +48,16 @@ const addNewCardButton = document.querySelector(".profile__buttons-add");
 const addCardModal = document.querySelector("#add-card-modal");
 const addCardFormElement = document.querySelector("#add-card-form");
 const cardTitleInput = addCardFormElement.querySelector(
-  ".modal__form-type-title"
+  "#modal__form-type-title"
 );
-const cardUrlInput = addCardFormElement.querySelector(".modal__form-type-url");
+const cardUrlInput = addCardFormElement.querySelector("#modal__form-type-url");
 
 const previewImageModal = document.querySelector("#preview-image-modal");
 const previewImage = previewImageModal.querySelector(".modal__image");
 const previewImageName = previewImageModal.querySelector(".modal__image-name");
 const previewImageCloseButton =
   previewImageModal.querySelector(".modal__close");
+const escKeycode = 27;
 
 /*-------------------------------------------------*/
 /*                 functions                       */
@@ -64,14 +65,12 @@ const previewImageCloseButton =
 
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
+  document.addEventListener("keydown", processEscDown);
 }
-
-//function closeAddModal() {
-// addCardModal.classList.remove("modal_opened");
-//}
 
 function openPopUp(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", processEscDown);
 }
 
 function getCardElement(cardData) {
@@ -160,3 +159,27 @@ initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 previewImageCloseButton.addEventListener("click", () => {
   closePopUp(previewImageModal);
 });
+
+/*-------------------------------------------------*/
+/* closing Modal clicking anywhere outside it      */
+/*-------------------------------------------------*/
+function closeModalOnRemoteClick(evt) {
+  if (
+    evt.target === evt.currentTarget ||
+    evt.target.classList.contains("modal__close")
+  ) {
+    closePopUp(evt.target);
+  }
+}
+profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
+
+addCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
+
+previewImageModal.addEventListener("mousedown", closeModalOnRemoteClick);
+
+const processEscDown = (evt) => {
+  if (evt.which === escKeycode) {
+    const activeModal = document.querySelector(".modal_opened");
+    closeModal(activeModal);
+  }
+};

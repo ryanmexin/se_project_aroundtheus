@@ -77,7 +77,6 @@
 
 .modal__form-input {
   height: 27px;
-  margin-bottom: 30px;
   padding: 0;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -87,6 +86,10 @@
   line-height: 16.94px;
   letter-spacing: 0em;
   text-align: left;
+}
+
+.modal__form-input:not(:first-of-type) {
+  margin-top: 30px;
 }
 
 .modal__form-input:last-of-type {
@@ -99,6 +102,25 @@
   font-size: 14px;
   line-height: 16.94px;
   color: black;
+}
+
+.modal__input_type_error {
+  border-bottom: 1px solid red;
+  color: red;
+  font-family: "Inter", Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.52px;
+  padding-top: 5px;
+  padding-bottom: 13px;
+}
+.modal__error_visible {
+  border-top: 1px solid red;
+  color: red;
+  font-family: "Inter", Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.52px;
 }
 
 .modal__button {
@@ -119,6 +141,16 @@
 .modal__button:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+.modal__button_disabled{
+  border-color: rgba(0, 0, 0, 0.2);
+  background-color: white;
+  color: rgba(0, 0, 0, 0.2);
+}
+.modal__button_disabled:hover {
+  opacity: 1;
+  cursor: default;
 }
 
 @media screen and (max-width: 500px) {
