@@ -1,7 +1,3 @@
-// enabling validation by calling enableValidation()
-// pass all the settings on call
-//1hr:20 on video
-
 const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__form-input",
