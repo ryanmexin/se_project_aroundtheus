@@ -29,6 +29,19 @@ function checkInputValidity(formEl, inputEl, options) {
   }
 }
 
+
+function setEventListeners(formEl, options) {
+  const { inputSelector } = options;
+  const inputEls = [...formEl.querySelectorAll(inputSelector)];
+  const submitButton = formEl.querySelector(".modal__button", options);
+  toggleButtonState(inputEls, submitButton, options);
+  inputEls.forEach((inputEl) => {
+    inputEl.addEventListener("input", (e) => {
+      checkInputValidity(formEl, inputEl, options);
+      toggleButtonState(inputEls, submitButton, options);
+    });
+  });
+}
 function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
   let foundInvalid = false;
   inputEls.forEach((inputEl) => {
@@ -45,20 +58,6 @@ function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
     submitButton.disabled = false;
   }
 }
-
-function setEventListeners(formEl, options) {
-  const { inputSelector } = options;
-  const inputEls = [...formEl.querySelectorAll(inputSelector)];
-  const submitButton = formEl.querySelector(".modal__button", options);
-  toggleButtonState(inputEls, submitButton, options);
-  inputEls.forEach((inputEl) => {
-    inputEl.addEventListener("input", (e) => {
-      checkInputValidity(formEl, inputEl, options);
-      toggleButtonState(inputEls, submitButton, options);
-    });
-  });
-}
-
 function enableValidation(options) {
   const formEls = [...document.querySelectorAll(options.formSelector)];
   formEls.forEach((formEl) => {
