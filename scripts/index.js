@@ -1,3 +1,5 @@
+import Card from "./card.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -25,7 +27,13 @@ const initialCards = [
   },
 ];
 
+const cardData = {
+  name: "Lago di Braies",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
+}
 
+const card = new Card(cardData, "#card-template")
+card.getView()
 
 /*-------------------------------------------------*/
 /*                    Elements                     */
@@ -100,13 +108,13 @@ function getCardElement(cardData) {
   });
 
   // like button logic
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-buttton_active");
-  });
+  //likeButton.addEventListener("click", () => {
+  //  likeButton.classList.toggle("card__like-buttton_active");
+ // });
   // delete button logic
-  cardDeleteButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
+ // cardDeleteButton.addEventListener("click", () => {
+   // cardElement.remove();
+ // });
 
   cardImageEl.src = cardData.link;
   cardImageEl.alt = cardData.name;

@@ -61,7 +61,7 @@
   transition: opacity 0.3s linear;
 }
 
-.card__like-buttton_active {
+.card__like-button_active {
   background: url("../images/vectors/Union.svg");
 }
 
