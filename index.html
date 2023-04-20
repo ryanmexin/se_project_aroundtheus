@@ -44,7 +44,7 @@
         <div class="modal__container">
             <button class="modal__close" id="profile-modal-close-btn"></button>
             <h2 class="modal__heading">Edit profile</h2>
-            <form class="modal__form">
+            <form class="modal__form" id="profile-form">
                 <input class="modal__form-input" type="text" name="title" id="profile-title-input" placeholder="Name"
                     maxlength="40" minlength="2" required>
                 <span class="modal__error" id="profile-title-input-error"></span>
@@ -91,14 +91,14 @@
             <img class="card__image" src=" " alt=" " />
             <button class="card__delete-button" type="button"></button>
             <div class="card__description">
-                <h2 class="card__title"></h2>
+                <h2 class="card__title" id="card-title"></h2>
                 <button class="card__like-button" type="button"></button>
             </div>
         </li>
 
     </template>
 
-    <script type="module" src="./scripts/index.js" defer ></script>
+    <script type="module" src="./pages/index.js" defer ></script>
     <!--<script src="./scripts/validation.js" defer></script>-->
 </body>
 

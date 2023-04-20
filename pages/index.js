@@ -1,4 +1,8 @@
-import Card from "./card.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+import {openPopUp, closePopUp } from "../utils/utils.js";
+
+
 
 const initialCards = [
   {
@@ -30,10 +34,10 @@ const initialCards = [
 const cardData = {
   name: "Lago di Braies",
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-}
+};
 
-const card = new Card(cardData, "#card-template")
-card.getView()
+//const card = new Card(cardData, "#card-template");
+//card.getView();
 
 /*-------------------------------------------------*/
 /*                    Elements                     */
@@ -70,28 +74,56 @@ const previewImageName = previewImageModal.querySelector(".modal__image-name");
 const previewImageCloseButton =
   previewImageModal.querySelector(".modal__close");
 const ESC_KEYCODE = 27;
+const cardSelector = '#card-template';
 
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
 
 /*-------------------------------------------------*/
 /*                 functions                       */
 /*-------------------------------------------------*/
 
-function openPopUp(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keydown", processEscDown);
-}
+// function openPopUp(modal) {
+//   modal.classList.add("modal_opened");
+//   document.addEventListener("keydown", processEscDown);
+// }
 
-function closePopUp(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", processEscDown);
-}
+// function closePopUp(modal) {
+//   modal.classList.remove("modal_opened");
+//   document.removeEventListener("keydown", processEscDown);
+// }
 
-const processEscDown = (evt) => {
-  if (evt.which === ESC_KEYCODE) {
-    const activeModal = document.querySelector(".modal_opened");
-    closePopUp(activeModal);
-  }
+// const processEscDown = (evt) => {
+//   if (evt.which === ESC_KEYCODE) {
+//     const activeModal = document.querySelector(".modal_opened");
+//     closePopUp(activeModal);
+//   }
+// };
+
+const validationSettings = {
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
 };
+
+const editForm = document.querySelector("#profile-form")
+const editFormValidator = new FormValidator(validationSettings, editForm);
+const addFormValidator = new FormValidator(validationSettings, addCardFormElement);
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
+
+
+console.log(profileEditForm);
+
 
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -110,11 +142,11 @@ function getCardElement(cardData) {
   // like button logic
   //likeButton.addEventListener("click", () => {
   //  likeButton.classList.toggle("card__like-buttton_active");
- // });
+  // });
   // delete button logic
- // cardDeleteButton.addEventListener("click", () => {
-   // cardElement.remove();
- // });
+  // cardDeleteButton.addEventListener("click", () => {
+  // cardElement.remove();
+  // });
 
   cardImageEl.src = cardData.link;
   cardImageEl.alt = cardData.name;
@@ -122,9 +154,10 @@ function getCardElement(cardData) {
   return cardElement;
 }
 
-function renderCard(cardData) {
+const renderCard =(cardData, cardListEl) => {
   const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
+  const card = new Card (cardData, cardSelector);
+  cardListEl.prepend(card.getView());
 }
 
 /*-------------------------------------------------*/
@@ -148,19 +181,17 @@ function handleAddCardFormSubmit(e, formEl, options) {
     name,
     link,
   });
- 
+
   renderCard({ name, link }, cardListEl);
   addCardFormElement.reset();
   closePopUp(addCardModal);
-  toggleButtonState([cardTitleInput, cardUrlInput], submitButton, config)
-     
-  }
-
+  toggleButtonState([cardTitleInput, cardUrlInput], submitButton, config);
+}
 
 /*-------------------------------------------------*/
 /* Event Listeners (to display name and subtitle in modal)*/
 /*-------------------------------------------------*/
-profileEditBtn.addEventListener("click",() => {
+profileEditBtn.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
   openPopUp(profileEditModal);
