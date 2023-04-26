@@ -71,11 +71,11 @@ editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, editForm);
 addFormValidator.enableValidation();
 
-previewImageCloseButton.addEventListener("click", () => closeModal(pictureModal));
+previewImageCloseButton.addEventListener("click", () => closePopUp(previewImageModal));
 
 //Edit Modal
 editCloseButton.addEventListener("click", () =>
-closeModal(profileEditModal)
+closePopUp(profileEditModal)
 );
 
 profileEditBtn.addEventListener("click", function () {
@@ -93,7 +93,7 @@ profileEditModal.addEventListener("submit", (event) =>{
 });
 
 //Add Modal
-addCloseButton.addEventListener("click", () => closeModal(addCardModal));
+addCloseButton.addEventListener("click", () => closePopUp(addCardModal));
 addNewCardButton.addEventListener("click", function () {
     openPopUp(addCardModal);
 });

@@ -39,24 +39,24 @@
 //       checkInputValidity(formEl, inputEl, options);
 //       toggleButtonState(inputEls, submitButton, options);
 //     });
+// //   });
+// // }
+// function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
+//   let foundInvalid = false;
+//   inputEls.forEach((inputEl) => {
+//     if (!inputEl.validity.valid) {
+//       foundInvalid = true;
+//     }
 //   });
-// }
-function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
-  let foundInvalid = false;
-  inputEls.forEach((inputEl) => {
-    if (!inputEl.validity.valid) {
-      foundInvalid = true;
-    }
-  });
 
-  if (foundInvalid) {
-    submitButton.classList.add(inactiveButtonClass);
-    submitButton.disabled = true;
-  } else {
-    submitButton.classList.remove(inactiveButtonClass);
-    submitButton.disabled = false;
-  }
-};
+//   if (foundInvalid) {
+//     submitButton.classList.add(inactiveButtonClass);
+//     submitButton.disabled = true;
+//   } else {
+//     submitButton.classList.remove(inactiveButtonClass);
+//     submitButton.disabled = false;
+//   }
+// };
 // function enableValidation(options) {
 //   const formEls = [...document.querySelectorAll(options.formSelector)];
 //   formEls.forEach((formEl) => {

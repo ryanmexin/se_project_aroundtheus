@@ -25,10 +25,10 @@ errorMessageElement.classList.add(this._errorClass);
 }
 
 _hideInputError(inputEl) {
-  const errorMessageElement = this.formquerySelector(
+  const errorMessageElement = this._form.querySelector(
       "#" + inputEl.id + "-error"
   );
-  inputElement.classList.remove(this._inputErrorClass);
+  inputEl.classList.remove(this._inputErrorClass);
   errorMessageElement.textContent = "";
   errorMessageElement.classList.remove(this._errorClass);
 
