@@ -1,25 +1,26 @@
-export function openPopUp(modal) {
-    modal.classList.add("modal_opened");
-    document.addEventListener("keydown", processEscDown);
-  }
-  
 export function closePopUp(modal) {
-    modal.classList.remove("modal_opened");
-    document.removeEventListener("keydown", processEscDown);
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", processEscDown);
+  modal.removeEventListener("mousedown", closeModalOnRemoteClick);
+}
+
+export function openPopUp(modal) {
+  modal.classList.add("modal_opened");
+  document.addEventListener("keydown", processEscDown);
+  modal.addEventListener("mouseDown", closeModalOnRemoteClick)
+}
+
+export function closeModalByEscape(evt) {
+  if(evt.key === "Escape") {
+      const openModal = document.querySelector(".modal_opened");
+      closeModalByEscape(openedModal);
   }
-  
-export const processEscDown = (evt) => {
-    if (evt.which === ESC_KEYCODE) {
-      const activeModal = document.querySelector(".modal_opened");
-      closePopUp(activeModal);
-    }
-  };
+}
 
 export function closeModalOnRemoteClick(evt) {
-    if (
-      evt.target === evt.currentTarget ||
-      evt.target.classList.contains("modal__close")
-    ) {
-      closePopUp(evt.currentTarget);
-    }
-  }
+  if(evt.target === evt.currentTarget) {
+      closeModalByEscape(evt.target);
+      }
+}
+
+
