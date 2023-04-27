@@ -145,6 +145,7 @@
 }
 
 .modal__button_disabled {
+  border: 1px solid #000000;
   border-color: rgba(0, 0, 0, 0.2);
   background-color: white;
   color: rgba(0, 0, 0, 0.2);
