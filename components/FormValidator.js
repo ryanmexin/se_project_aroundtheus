@@ -67,6 +67,7 @@ enableValidation() {
       evt.preventDefault();
   });
   this._setEventListeners();
+  this.toggleButtonState();
 }
 }
 

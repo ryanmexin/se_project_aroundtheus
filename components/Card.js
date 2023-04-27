@@ -33,7 +33,7 @@ _setEventListeners() {
 
 _handleLikeIcon() {
     this._cardElement
-        .querySelector("card__like-button")
+        .querySelector(".card__like-button")
         .classList.toggle("card__like-button_active");
 }
 _handleDeleteButton() {

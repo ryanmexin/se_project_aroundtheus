@@ -13,7 +13,7 @@ export function openPopUp(modal) {
 export function closeModalByEscape(evt) {
   if(evt.key === "Escape") {
       const openedModal = document.querySelector(".modal_opened");
-      closeModalByEscape(openedModal);
+      closePopUp(openedModal);
   }
 }
 
