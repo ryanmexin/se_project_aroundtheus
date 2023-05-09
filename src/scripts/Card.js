@@ -1,16 +1,10 @@
-import { openPopUp } from "../utils/utils.js";
-
-import {
-  previewImageModal,
-  previewImage,
-  previewImageName,
-} from "../pages/index.js";
-
 export default class Card {
-  constructor({ name, link }, cardSelector) {
-    this._name = name;
-    this._link = link;
+  constructor({ data, handleImageClick, handleCardClick }, cardSelector) {
+    this._name = data.name;
+    this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleImageClick = handleImageClick;
+    this._handleCardClick = handleCardClick;
   }
 
   _setEventListeners() {

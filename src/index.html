@@ -9,26 +9,28 @@
     <meta name="keywords" content="gallery, pictures, landmarks, photos" />
     <title>Around the US - Ryan Mexin's Sprint 3 Project</title>
     <link rel="shortcut icon" href="./favicon.ico" />
-    <link rel="stylesheet" href="./pages/index.css" />
+
 </head>
 
 <body class="body">
     <div class="body__content">
         <header class="header">
-            <img class="header__logo" src="./images/vectors/vector.svg" alt="Around the U.S.">
+            <img class="header__logo" src="<%=require('./images/vectors/vector.svg')%>" alt="Around the U.S.">
         </header>
         <main class="page">
             <section class="profile">
-                <img src="./images/jacques-cousteau.jpg" alt="Jacques Cousteau" class="profile__image" />
+                <img src="<%=require('./images/jacques-cousteau.jpg')%>" alt="Jacques Cousteau"
+                    class="profile__image" />
                 <div class="profile__paragraph">
                     <h1 class="profile__title">Jacques Cousteau</h1>
                     <button class="profile__buttons-edit" id="profile-edit-button" type="button">
-                        <img class="profile__buttons-edit-icon" src="./images/vectors/pen.svg" alt="Edit Profile">
+                        <img class="profile__buttons-edit-icon" src="<%=require('./images/vectors/pen.svg')%>"
+                            alt="Edit Profile">
                     </button>
                     <p class="profile__subtitle">Explorer</p>
                 </div>
                 <button class="profile__buttons-add" type="button">
-                    <img class="profile__buttons-add-icon" src="./images/vectors/plus.svg" alt="add">
+                    <img class="profile__buttons-add-icon" src="<%=require('./images/vectors/plus.svg')%>" alt="add">
                 </button>
             </section>
             <section class="cards">
@@ -78,7 +80,8 @@
                 <input class="modal__form-input" id="modal__form-type-url" type="url" name="url" placeholder="Image URL"
                     required>
                 <span class="modal__error" id="modal__form-type-url-error"></span>
-                <button class="modal__button modal__button_disabled" id="card__save_button" type="submit" disabled>Save</button>
+                <button class="modal__button modal__button_disabled" id="card__save_button" type="submit"
+                    disabled>Save</button>
 
             </form>
         </div>
@@ -98,7 +101,7 @@
 
     </template>
 
-    <script type="module" src="./pages/index.js" defer ></script>
+    <!-- <script type="module" src="./scripts/index.js" defer></script>-->
     <!--<script src="./scripts/validation.js" defer></script>-->
 </body>
 
