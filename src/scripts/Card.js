@@ -1,3 +1,5 @@
+
+
 export default class Card {
   constructor({ data, handleImageClick, handleCardClick }, cardSelector) {
     this._name = data.name;
@@ -39,7 +41,7 @@ export default class Card {
     previewImage.src = this._link;
     previewImage.alt = `Photo of ${this._name}`;
     previewImageName.textContent = this._name;
-    openPopUp(previewImageModal);
+    open(previewImageModal);
   }
 
   _getTemplate() {
