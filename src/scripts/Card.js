@@ -1,12 +1,12 @@
 
 
 export default class Card {
-  constructor({ data, handleImageClick, handleCardClick }, cardSelector) {
+  constructor({ data, handleImageClick }, cardSelector) {
+    this._data = data;
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
-    this._handleCardClick = handleCardClick;
   }
 
   _setEventListeners() {
@@ -23,7 +23,7 @@ export default class Card {
     this._cardElement
       .querySelector(".card__image")
       .addEventListener("click", () => {
-        this._handleCardClick();
+        this._handleImageClick(this._data);
       });
   }
 
@@ -37,12 +37,12 @@ export default class Card {
     this._cardElement = null;
   }
 
-  _handleCardClick() {
-    previewImage.src = this._link;
-    previewImage.alt = `Photo of ${this._name}`;
-    previewImageName.textContent = this._name;
-    open(previewImageModal);
-  }
+  // _handleCardClick() {
+  //   previewImage.src = this._link;
+  //   previewImage.alt = `Photo of ${this._name}`;
+  //   previewImageName.textContent = this._name;
+  //   open(previewImageModal);
+  // }
 
   _getTemplate() {
     return document

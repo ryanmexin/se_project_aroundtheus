@@ -13,8 +13,5 @@ export default class PopupWithImage extends Popup {
     this._modalPictureDescription.textContent = data.name;
     super.open();
   }
-  close() {
-
-    super.close();
-  }
+  
 }
