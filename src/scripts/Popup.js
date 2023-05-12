@@ -26,7 +26,7 @@ export default class Popup {
       this.close();
     }
   };
-  // setEventListeners() {
-  //   this._popupElement.addEventListener("click", this._handleEscClose);
-  // }
+  setEventListeners() {
+    this._popupElement.querySelector(".modal__close").addEventListener("click", () => this.close());
+  }
 }
