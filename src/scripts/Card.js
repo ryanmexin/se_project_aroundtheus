@@ -37,12 +37,6 @@ export default class Card {
     this._cardElement = null;
   }
 
-  // _handleCardClick() {
-  //   previewImage.src = this._link;
-  //   previewImage.alt = `Photo of ${this._name}`;
-  //   previewImageName.textContent = this._name;
-  //   open(previewImageModal);
-  // }
 
   _getTemplate() {
     return document

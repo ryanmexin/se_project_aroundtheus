@@ -27,6 +27,6 @@ export default class Popup {
     }
   };
   setEventListeners() {
-    this._popupElement.querySelector(".modal__close").addEventListener("click", () => this.close());
+    this._popupElement.querySelector(".modal__close").addEventListener("click", () => this.close())
   }
 }

@@ -15,7 +15,7 @@ import FormValidator from "./FormValidator.js";
  const cardPreview = new PopupWithImage({
   popupSelector: "#preview-image-modal",
  });
-//CardPreview.setEventListeners();
+cardPreview.setEventListeners();
 
 // Section / Card
 
@@ -53,7 +53,10 @@ const newCardPopup = new PopupWithForm({
     newCardPopup.close();
   },
 });
+newCardPopup.setEventListeners();
 newCardPopup.close();
+
+
 const editProfileModal = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: (inputValues) => {
@@ -61,13 +64,16 @@ const editProfileModal = new PopupWithForm({
     editProfileModal.close();
   },
 });
+editProfileModal.setEventListeners();
 editProfileModal.close();
 
 // pop button
 const openEditPopupButton = document.querySelector("#profile-edit-button");
 openEditPopupButton.addEventListener("click", () => {
   user.getUserInfo();
+  editFormValidator. resetValidation();
   editProfileModal.open();
+
 });
 const openAddPopupButton = document.querySelector(".profile__buttons-add");
 openAddPopupButton.addEventListener("click", () => {
