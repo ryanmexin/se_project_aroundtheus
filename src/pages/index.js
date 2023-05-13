@@ -3,7 +3,12 @@ import "../pages/index.css";
 import PopupWithForm from "../scripts/PopupWithForm.js";
 import PopupWithImage from "../scripts/PopupWithImage.js";
 import Section from "../scripts/Section.js";
-import { initialCards, selectors } from "../utils/Constants.js";
+import {
+  initialCards,
+  selectors,
+  profileTitleInput,
+  profileDescriptionInput,
+} from "../utils/Constants.js";
 import UserInfo from "../scripts/UserInfo.js";
 import FormValidator from "../scripts/FormValidator.js";
 
@@ -51,7 +56,6 @@ const newCardPopup = new PopupWithForm({
 });
 newCardPopup.setEventListeners();
 
-
 const editProfileModal = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: (inputValues) => {
@@ -61,17 +65,18 @@ const editProfileModal = new PopupWithForm({
 });
 editProfileModal.setEventListeners();
 
-
 // pop button
 const openEditPopupButton = document.querySelector("#profile-edit-button");
 openEditPopupButton.addEventListener("click", () => {
-  user.getUserInfo();
+  const userData = user.getUserInfo();
+  profileTitleInput.value = userData.title;
+  profileDescriptionInput.value = userData.subtitle;
   editFormValidator.resetValidation();
   editProfileModal.open();
 });
 const openAddPopupButton = document.querySelector(".profile__buttons-add");
 openAddPopupButton.addEventListener("click", () => {
-  addFormValidator.resetValidation()
+  addFormValidator.resetValidation();
   newCardPopup.open();
 });
 // Form Validator

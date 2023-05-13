@@ -25,6 +25,11 @@ export const initialCards = [
   },
 ];
 
+export const profileTitleInput = document.querySelector("#profile-title-input");
+export const profileDescriptionInput = document.querySelector(
+  "#profile-description-input"
+);
+
 export const selectors = {
   cardSection: ".cards__list",
   cardTemplate: "#card-template",
