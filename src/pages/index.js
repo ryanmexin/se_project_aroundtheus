@@ -1,16 +1,16 @@
-import Card from "../scripts/components.js";
+import Card from "../components/Card.js";
 import "../pages/index.css";
-import PopupWithForm from "../scripts/PopupWithForm.js";
-import PopupWithImage from "../scripts/PopupWithImage.js";
-import Section from "../scripts/Section.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import Section from "../components/Section.js";
 import {
   initialCards,
   selectors,
   profileTitleInput,
   profileDescriptionInput,
-} from "../utils/Constants.js";
-import UserInfo from "../scripts/UserInfo.js";
-import FormValidator from "../scripts/FormValidator.js";
+} from "../utils/constants.js";
+import UserInfo from "../components/UserInfo.js";
+import FormValidator from "../components/FormValidator.js";
 
 // Popup with Image
 const cardPreview = new PopupWithImage({

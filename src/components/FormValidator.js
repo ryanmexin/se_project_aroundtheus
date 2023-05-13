@@ -69,7 +69,6 @@ class FormValidator {
     this._submitButton.disabled = true;
   }
   resetValidation() {
-    this.toggleButtonState();
     this.disableButton();
   }
 }
