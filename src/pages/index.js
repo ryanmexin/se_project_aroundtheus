@@ -8,9 +8,19 @@ import {
   selectors,
   profileTitleInput,
   profileDescriptionInput,
+  avatarModalFormSelector,
 } from "../utils/constants.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
+import Api from "../components/Api.js";
+
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12",
+  authToken: "cb447498-fb2c-4c99-9fc5-8ee58bc7fe4c",
+});
+
+api.getCardList().then((res) => console.log(res));
+api.getUserInfo().then((res) => console.log(res));
 
 // Popup with Image
 const cardPreview = new PopupWithImage({
@@ -41,19 +51,34 @@ const cardSection = new Section(
   },
   selectors.cardSection
 );
+
 cardSection.renderItems();
 
 // User Info
 const user = new UserInfo(".profile__title", ".profile__subtitle");
 
+api.getUserInfo().then((userData) => {
+  user.setUserInfo({
+    title: userData.name,
+    subtitle: userData.about,
+  });
+});
+
 // Popup with form
 const newCardPopup = new PopupWithForm({
   popupSelector: "#add-card-modal",
   handleFormSubmit: (inputValues) => {
-    renderCard(inputValues);
-    newCardPopup.close();
+    //newCardPopup.renderLoading(true);
+    api.addCard(inputValues)
+    //newCardPopup.setLoading(true);
+    //api.addCard(inputValues).then((inputValues) => {
+     // newCardPopup.setLoading(false);
+     //loadingText: "Saving...",
+      renderCard(inputValues);
+      newCardPopup.close();
+      }
   },
-});
+);
 newCardPopup.setEventListeners();
 
 const editProfileModal = new PopupWithForm({
@@ -64,6 +89,41 @@ const editProfileModal = new PopupWithForm({
   },
 });
 editProfileModal.setEventListeners();
+
+
+
+
+//test 
+// const avatarPopup = new PopupWithForm("#profile-image-edit-popup", (value) => {
+//   avatarPopup.renderLoading(true);
+//   api
+//     .updateProfileAvatar(value.avatar)
+//     .then((value) => {
+//       newUserInfo.setAvatar(value.avatar);
+//       avatarPopup.closeModalWindow();
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     })
+//     .finally(() => {
+//       avatarPopup.renderLoading(false, "Save");
+//     });
+// });
+
+// const profileImageModal = new PopupWithForm({
+//   popupSelector: "#modal-profile-image",
+//   handleFormSubmit
+// })
+
+
+// const editImageButton = document.querySelector(".profile-image-button");
+// editImageButton.addEventListener("click", () => {
+//   addFormValidator.resetValidation();
+//   avatarModalFormSelector.open();
+  // if (formValidators.hasOwnProperty(avatarModalFormSelector)) {
+  //   [avatarModalFormSelector].resetValidation();
+  // }
+// });
 
 // pop button
 const openEditPopupButton = document.querySelector("#profile-edit-button");
@@ -90,6 +150,10 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
+const profileImageButton = document.querySelector(".profile__image-edit-button");
+
+const profileImageSaveButton = document.querySelector(".modal__button_save");
+const profileImage = document.querySelector("#modal-profile-image");
 const editForm = document.querySelector("#profile-form");
 const editFormValidator = new FormValidator(config, editForm);
 editFormValidator.enableValidation();

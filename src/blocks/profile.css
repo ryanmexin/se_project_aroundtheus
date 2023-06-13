@@ -14,6 +14,42 @@
   padding: 3.75px 26.5px 3.75px 22.5px;
 }
 
+
+.profile__image-edit {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.profile__image-edit-button {
+  width: 26px;
+  height: 26px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 47px;
+  left: 70px;
+  cursor: pointer;
+  opacity: 0;
+  border: none;
+  outline: none;
+  background: no-repeat transparent url(../images/vectors/pen.svg) center;
+  background-size: cover;
+  transition: 600ms all ease;
+}
+
+.profile__image-edit-button:hover {
+  opacity: 100%;
+}
+.profile__image-edit:hover .profile__image {
+  opacity: .3;
+  transition: 600ms all ease;
+}
+.profile__image-edit:hover .profile__image-edit-button {
+  opacity: 1;
+  transition: 600ms all ease;
+}
+
 .profile__paragraph {
   display: grid;
   grid-template-columns: max-content;
@@ -130,6 +166,7 @@
   .profile__paragraph {
     grid-template-columns: minmax(auto, 196px) minmax(auto, 18px);
   }
+
 
   .profile__title {
     font-size: 22px;

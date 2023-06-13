@@ -51,6 +51,11 @@
   margin-bottom: 0;
 }
 
+.card__like-container {
+ display: flex;
+ align-items: center;
+}
+
 .card__like-button {
   background: transparent url("../images/vectors/heart.svg") center no-repeat;
   width: 21px;
@@ -59,6 +64,36 @@
   background-color: rgba(255, 255, 255, 0);
   cursor: pointer;
   transition: opacity 0.3s linear;
+}
+.card__like-amount {
+  position: relative;
+  width: 9px;
+  height: 13px;
+  bottom: -15px;
+  right: 15px;
+  font-family: 'Inter', Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  color: #000000;
+}
+
+
+.card__number {
+  position: relative;
+  width: 9px;
+  height: 13px;
+  bottom: -15px;
+  right: 15px;
+  font-family: 'Inter', Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  color: #000000;
 }
 
 .card__like-button_active {
