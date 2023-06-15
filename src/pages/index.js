@@ -9,24 +9,45 @@ import {
   profileTitleInput,
   profileDescriptionInput,
   avatarModalFormSelector,
+  editButtonAvatar,
+  changeAvatarModal,
+  avatarSelector,
 } from "../utils/constants.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import Api from "../components/Api.js";
+import { userInfo } from "os";
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   authToken: "cb447498-fb2c-4c99-9fc5-8ee58bc7fe4c",
 });
 
-api.getCardList().then((res) => console.log(res));
-api.getUserInfo().then((res) => console.log(res));
+
+//pulling in the card data via API
+let cardSection;
+
+api.getCardList().then((res) => {
+   cardSection = new Section(
+  {
+    items: res,
+    renderer: renderCard,
+  },
+  selectors.cardSection
+);
+
+cardSection.renderItems();});
+
 
 // Popup with Image
 const cardPreview = new PopupWithImage({
   popupSelector: "#preview-image-modal",
 });
 cardPreview.setEventListeners();
+
+//Change avatar picture
+
+
 
 // Section / Card
 
@@ -44,18 +65,9 @@ const renderCard = (data) => {
   cardSection.addItem(newCard);
 };
 
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: renderCard,
-  },
-  selectors.cardSection
-);
-
-cardSection.renderItems();
 
 // User Info
-const user = new UserInfo(".profile__title", ".profile__subtitle");
+const user = new UserInfo(".profile__title", ".profile__subtitle", ",profile__image");
 
 api.getUserInfo().then((userData) => {
   user.setUserInfo({
@@ -90,8 +102,40 @@ const editProfileModal = new PopupWithForm({
 });
 editProfileModal.setEventListeners();
 
+// profile Image 
+
+editButtonAvatar.addEventListener("click", () => {
+  changeProfilePopup.open();
+  // if (formValidators.hasOwnProperty(avatarModalFormSelector)) {
+    // formValidators[avatarModalFormSelector].resetValidation();
+  }
+);
 
 
+const avatarImageModal = new PopupWithForm({
+  popupSelector: "#modal-profile-image",
+  handleFormSubmit: (inputValues) => {
+    api
+      .updateProfileAvatar({avatar: data.url})
+      .then((inputValues) => {
+        userInfo.setAvatarInfo(inputValues.avatar);
+        avatarImageModal.close();
+      });
+    }});
+    
+      
+
+changeProfilePopup.setEventListeners();
+// function handleProfileImageForm() {
+//   //evt.preventDefault();
+//   //avatarImageModal.setLoading(true);
+//   const profileImage = document.querySelector(".profile__image");
+//   const profileImageInput = document.querySelector("#profile-image-link");
+//   profileImage.src = profileImageInput.value;
+//   //profileImageModal.setLoading(false);
+//   //api.updateProfileImage();
+//   avatarImageModal.close();
+// }
 
 //test 
 // const avatarPopup = new PopupWithForm("#profile-image-edit-popup", (value) => {
@@ -136,9 +180,10 @@ openEditPopupButton.addEventListener("click", () => {
 });
 const openAddPopupButton = document.querySelector(".profile__buttons-add");
 openAddPopupButton.addEventListener("click", () => {
-  addFormValidator.resetValidation();
+  //addFormValidator.resetValidation();
   newCardPopup.open();
 });
+
 // Form Validator
 
 const config = {

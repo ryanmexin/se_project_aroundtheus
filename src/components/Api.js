@@ -68,11 +68,20 @@ addCard({name,link}){
         });
   }
 
-
-
-
-
+  updateUserProfile(avatar) {
+    return this._request("https://around.nomoreparties.co/v1/group-12//users/me/avatar", {
+      method: "PATCH",
+      headers:{
+        authorization: this._authToken,
+        "Content-Type": "application/json"},
+      body: JSON.stringify(avatar),
+    });
+  }
 }
+
+
+
+
 
 
 

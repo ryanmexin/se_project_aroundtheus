@@ -29,9 +29,12 @@ export const profileTitleInput = document.querySelector("#profile-title-input");
 export const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
+export const editButtonAvatar = document.querySelector(".profile__image-edit-button")
 export const editImageButton = document.querySelector(".profile-image-button");
 //export const changeProfileModal = document.querySelector(modalChangeProfileSelector);
 export const avatarModalFormSelector = "#profile-change-image";
+export const changeAvatarModal = "modal-profile-image";
+export const avatarSelector = "profile__image";
 
 export const selectors = {
   cardSection: ".cards__list",
