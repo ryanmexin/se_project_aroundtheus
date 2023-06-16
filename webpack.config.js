@@ -55,4 +55,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
   ],
+  resolve: {
+    fallback:{os: false},
+  }
 };

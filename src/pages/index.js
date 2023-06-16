@@ -10,7 +10,6 @@ import {
   profileDescriptionInput,
   avatarModalFormSelector,
   editButtonAvatar,
-  changeAvatarModal,
   avatarSelector,
 } from "../utils/constants.js";
 import UserInfo from "../components/UserInfo.js";
@@ -67,7 +66,7 @@ const renderCard = (data) => {
 
 
 // User Info
-const user = new UserInfo(".profile__title", ".profile__subtitle", ",profile__image");
+const user = new UserInfo(".profile__title", ".profile__subtitle", ".profile__image");
 
 api.getUserInfo().then((userData) => {
   user.setUserInfo({
@@ -96,68 +95,46 @@ newCardPopup.setEventListeners();
 const editProfileModal = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: (inputValues) => {
+    editProfileModal.renderLoading(true);
     user.setUserInfo(inputValues);
     editProfileModal.close();
   },
+  
 });
 editProfileModal.setEventListeners();
 
 // profile Image 
 
 editButtonAvatar.addEventListener("click", () => {
-  changeProfilePopup.open();
-  // if (formValidators.hasOwnProperty(avatarModalFormSelector)) {
-    // formValidators[avatarModalFormSelector].resetValidation();
-  }
-);
+  avatarImageModal.open();
+  //  if (formValidators.hasOwnProperty(avatarModalFormSelector)) {
+  //    formValidators[avatarModalFormSelector].resetValidation();
+  // }
+});
 
 
 const avatarImageModal = new PopupWithForm({
   popupSelector: "#modal-profile-image",
   handleFormSubmit: (inputValues) => {
     api
-      .updateProfileAvatar({avatar: data.url})
-      .then((inputValues) => {
-        userInfo.setAvatarInfo(inputValues.avatar);
+      .updateProfileAvatar({avatar: inputValues.link})
+      .then((response) => {
+        userInfo.setAvatarInfo(response.avatar);
         avatarImageModal.close();
-      });
-    }});
+      })
+      .catch(console.error)
+      .finally(() => {
+        modalFormUser.renderLoading(false);
+    });
+  },
+  loadingText: "Saving...",
+});
+
+  
+  avatarImageModal.setEventListeners();
     
-      
 
-changeProfilePopup.setEventListeners();
-// function handleProfileImageForm() {
-//   //evt.preventDefault();
-//   //avatarImageModal.setLoading(true);
-//   const profileImage = document.querySelector(".profile__image");
-//   const profileImageInput = document.querySelector("#profile-image-link");
-//   profileImage.src = profileImageInput.value;
-//   //profileImageModal.setLoading(false);
-//   //api.updateProfileImage();
-//   avatarImageModal.close();
-// }
-
-//test 
-// const avatarPopup = new PopupWithForm("#profile-image-edit-popup", (value) => {
-//   avatarPopup.renderLoading(true);
-//   api
-//     .updateProfileAvatar(value.avatar)
-//     .then((value) => {
-//       newUserInfo.setAvatar(value.avatar);
-//       avatarPopup.closeModalWindow();
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     })
-//     .finally(() => {
-//       avatarPopup.renderLoading(false, "Save");
-//     });
-// });
-
-// const profileImageModal = new PopupWithForm({
-//   popupSelector: "#modal-profile-image",
-//   handleFormSubmit
-// })
+ 
 
 
 // const editImageButton = document.querySelector(".profile-image-button");
@@ -180,7 +157,7 @@ openEditPopupButton.addEventListener("click", () => {
 });
 const openAddPopupButton = document.querySelector(".profile__buttons-add");
 openAddPopupButton.addEventListener("click", () => {
-  //addFormValidator.resetValidation();
+  addFormValidator.resetValidation();
   newCardPopup.open();
 });
 

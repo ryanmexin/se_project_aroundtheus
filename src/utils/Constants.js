@@ -33,7 +33,6 @@ export const editButtonAvatar = document.querySelector(".profile__image-edit-but
 export const editImageButton = document.querySelector(".profile-image-button");
 //export const changeProfileModal = document.querySelector(modalChangeProfileSelector);
 export const avatarModalFormSelector = "#profile-change-image";
-export const changeAvatarModal = "modal-profile-image";
 export const avatarSelector = "profile__image";
 
 export const selectors = {
