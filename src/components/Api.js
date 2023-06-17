@@ -69,12 +69,14 @@ addCard({name,link}){
   }
 
   updateUserProfile(avatar) {
-    return this._request("https://around.nomoreparties.co/v1/group-12//users/me/avatar", {
-      method: "PATCH",
+    return fetch("https://around.nomoreparties.co/v1/group-12//users/me/avatar", {
+      method: "GET",
       headers:{
         authorization: this._authToken,
         "Content-Type": "application/json"},
-      body: JSON.stringify(avatar),
+      body: JSON.stringify({
+        avatar
+      }),
     });
   }
 }

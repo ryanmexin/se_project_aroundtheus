@@ -58,6 +58,7 @@ const renderCard = (data) => {
       handleImageClick: (imageData) => {
         cardPreview.open(imageData);
       },
+      
     },
     selectors.cardTemplate
   );
@@ -84,8 +85,8 @@ const newCardPopup = new PopupWithForm({
     api.addCard(inputValues)
     //newCardPopup.setLoading(true);
     //api.addCard(inputValues).then((inputValues) => {
-     // newCardPopup.setLoading(false);
-     //loadingText: "Saving...",
+      //newCardPopup.setLoading(false);
+     loadingText: "Saving...",
       renderCard(inputValues);
       newCardPopup.close();
       }
@@ -134,14 +135,15 @@ const avatarImageModal = new PopupWithForm({
   popupSelector: "#modal-profile-image",
   handleFormSubmit: (inputValues) => {
     api
-      .updateProfileAvatar({avatar: inputValues.link})
+      .updateUserProfile({avatar: inputValues.link})
+      console.log(avatar)
       .then((response) => {
-        userInfo.setAvatarInfo(response.avatar);
+        userInfo.setUserInfo(response.avatar);
         avatarImageModal.close();
       })
       .catch(console.error)
       .finally(() => {
-        modalFormUser.renderLoading(false);
+       avatarImageModal.renderLoading(false);
     });
   },
   loadingText: "Saving...",
@@ -199,5 +201,6 @@ editFormValidator.enableValidation();
 const addCardFormElement = document.querySelector("#add-card-form");
 const addFormValidator = new FormValidator(config, addCardFormElement);
 addFormValidator.enableValidation();
-const profileImageValidator = new FormValidator(config, avatarModalFormSelector)
+const addProfileImageElement = document.querySelector("#profile-change-image")
+const profileImageValidator = new FormValidator(config, addProfileImageElement)
 profileImageValidator.enableValidation();
