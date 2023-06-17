@@ -70,7 +70,7 @@ addCard({name,link}){
 
   updateUserProfile(avatar) {
     return fetch("https://around.nomoreparties.co/v1/group-12//users/me/avatar", {
-      method: "GET",
+      method: "POST",
       headers:{
         authorization: this._authToken,
         "Content-Type": "application/json"},
