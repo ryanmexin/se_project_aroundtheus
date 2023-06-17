@@ -23,7 +23,6 @@ const api = new Api({
   authToken: "cb447498-fb2c-4c99-9fc5-8ee58bc7fe4c",
 });
 
-
 //pulling in the card data via API
 let cardSection;
 
@@ -51,6 +50,8 @@ cardPreview.setEventListeners();
 
 // Section / Card
 
+
+
 const renderCard = (data) => {
   const cardElement = new Card(
     {
@@ -58,13 +59,30 @@ const renderCard = (data) => {
       handleImageClick: (imageData) => {
         cardPreview.open(imageData);
       },
-      
-    },
-    selectors.cardTemplate
-  );
+      handleDeleteClick: () => {
+        deleteModal.open();
+        const id = cardElement.getId();
+        api
+        .deleteCard(id)
+        .then(() => {
+          cardElement.handleDeleteButton();
+          deleteModal.close();
+      })
+    }
+    }, selectors.cardTemplate);
+
+
   const newCard = cardElement.getView();
   cardSection.addItem(newCard);
 };
+
+const deleteModal = new PopupWithForm({
+  handleFormSubmit: () => {
+    deleteModal.renderLoading(true);
+  },
+  modalSelector: cardDeleteModal,
+  loadingText: "Deleting...",
+});
 
 
 // User Info
@@ -77,11 +95,11 @@ api.getUserInfo().then((userData) => {
   });
 });
 
-// Popup with form
+// Popup with form New Card Creation
 const newCardPopup = new PopupWithForm({
   popupSelector: "#add-card-modal",
   handleFormSubmit: (inputValues) => {
-    //newCardPopup.renderLoading(true);
+    newCardPopup.renderLoading(true);
     api.addCard(inputValues)
     //newCardPopup.setLoading(true);
     //api.addCard(inputValues).then((inputValues) => {
@@ -111,6 +129,10 @@ editButtonAvatar.addEventListener("click", () => {
   avatarImageModal.open();
   profileImageValidator.resetValidation();
 });
+
+
+
+cardDeleteModal.setEventListeners();
 
 // handleDeleteClick: () => {
 //   deleteModal.open();
