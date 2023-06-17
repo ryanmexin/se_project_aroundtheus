@@ -13,7 +13,7 @@ export default class UserInfo {
   setUserInfo({ title, subtitle, avatar }) {
     this.title.textContent = title;
     this.subtitle.textContent = subtitle;
-    this.avatar.src = avatar
+    this._profileAvatarElement.src = avatar
   }
 
   setAvatarInfo(avatar) {

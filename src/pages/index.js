@@ -137,7 +137,7 @@ const avatarImageModal = new PopupWithForm({
     api
       .updateUserProfile({avatar: inputValues.link})
       .then((response) => {
-        UserInfo.setUserInfo(response.avatar);
+        user.setUserInfo({avatar: response.avatar});
         avatarImageModal.close();
       })
       .catch(console.error)
