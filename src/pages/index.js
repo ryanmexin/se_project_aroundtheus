@@ -11,6 +11,7 @@ import {
   avatarModalFormSelector,
   editButtonAvatar,
   avatarSelector,
+  cardDeleteModal,
 } from "../utils/constants.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
@@ -107,10 +108,26 @@ editProfileModal.setEventListeners();
 
 editButtonAvatar.addEventListener("click", () => {
   avatarImageModal.open();
-  //  if (formValidators.hasOwnProperty(avatarModalFormSelector)) {
-  //    formValidators[avatarModalFormSelector].resetValidation();
-  // }
+  profileImageValidator.resetValidation();
 });
+
+// handleDeleteClick: () => {
+//   deleteModal.open();
+//   deleteModal.setSubmitAction(() => {
+//     deleteModal.renderLoading(true);
+//     const id = card.getId();
+//     api
+//       .removeCard(id)
+//       .then(() => {
+//         card.handleDeleteIcon();
+//         deleteModal.close();
+//       })
+//       .catch(console.error)
+//       .finally(() => {
+//         deleteModal.renderLoading(false);
+//       });
+//   });
+// },
 
 
 const avatarImageModal = new PopupWithForm({
@@ -182,3 +199,5 @@ editFormValidator.enableValidation();
 const addCardFormElement = document.querySelector("#add-card-form");
 const addFormValidator = new FormValidator(config, addCardFormElement);
 addFormValidator.enableValidation();
+const profileImageValidator = new FormValidator(config, avatarModalFormSelector)
+profileImageValidator.enableValidation();
