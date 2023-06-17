@@ -42,7 +42,7 @@ getUserInfo(){
  }
 
 addCard({name,link}){
-    return fetch("https://around.nomoreparties.co/v1/groupId-12/cards", {
+    return fetch("https://around.nomoreparties.co/v1/group-12/cards", {
   method: "POST",
   headers: {
     authorization: this._authToken,

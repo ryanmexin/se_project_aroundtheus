@@ -16,7 +16,7 @@ import {
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import Api from "../components/Api.js";
-import { userInfo } from "os";
+
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
@@ -137,7 +137,7 @@ const avatarImageModal = new PopupWithForm({
     api
       .updateUserProfile({avatar: inputValues.link})
       .then((response) => {
-        userInfo.setUserInfo(response.avatar);
+        UserInfo.setUserInfo(response.avatar);
         avatarImageModal.close();
       })
       .catch(console.error)
