@@ -80,7 +80,7 @@ const deleteModal = new PopupWithForm({
   handleFormSubmit: () => {
     deleteModal.renderLoading(true);
   },
-  modalSelector: cardDeleteModal,
+  popupSelector: cardDeleteModal,
   loadingText: "Deleting...",
 });
 
@@ -132,7 +132,7 @@ editButtonAvatar.addEventListener("click", () => {
 
 
 
-cardDeleteModal.setEventListeners();
+deleteModal.setEventListeners();
 
 // handleDeleteClick: () => {
 //   deleteModal.open();
