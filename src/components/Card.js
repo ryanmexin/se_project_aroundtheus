@@ -9,6 +9,7 @@ export default class Card {
     this.myId = myId;
     this._handleLikeClick = handleLikeClick;
     this._handleDeleteClick = handleDeleteClick;
+    this._likes = data.likes
   }
 
   getId() {
@@ -16,6 +17,15 @@ export default class Card {
   }
   isLiked() {
     return this._likes.some((like) => like._id === this._myId);
+  }
+
+  setLikes(likes) {
+    this._likes = likes;
+    this._handleLikeIcon();
+    this.updateLikes();
+  }
+  updateLikes() {
+    this._likesAmount.textContent = this._likes.length;
   }
 
   _setEventListeners() {

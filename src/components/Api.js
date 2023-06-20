@@ -111,5 +111,35 @@ return fetch(`https://around.nomoreparties.co/v1/group-12/cards/${cardId}`, {
     });
   }
 
+  getLikesCount(cardId) {
+    return this._request(`https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`, {
+      method: "GET",
+      headers: {
+        authorization: this._authToken,
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  likeCard(cardId) {
+    return this._request(`https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`, {
+      method: "PUT",
+      headers: {
+        authorization: this._authToken,
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  unLikeCard(cardId) {
+    return this._request(`https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._authToken,
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
 }
 

@@ -44,15 +44,13 @@ const cardPreview = new PopupWithImage({
 });
 cardPreview.setEventListeners();
 
-//Change avatar picture
 
 
 
-// Section / Card
 
-
-
+// Section / Card Create Card
 const renderCard = (data) => {
+  const likes = data.likes || [];
   const cardElement = new Card(
     {
       data,
@@ -68,8 +66,30 @@ const renderCard = (data) => {
           cardElement.handleDeleteButton();
           deleteModal.close();
       })
-    }
-    }, selectors.cardTemplate);
+    },
+    //possible area of issue 
+    handleLikeClick: () => {
+      const id = cardElement.getId();
+      if (cardElement.isLiked()) {
+        api
+          .unLikeCard(id)
+          .then((data) => {
+            cardElement.setLikes(data.likes);
+            
+          })
+          .catch((err) => console.error(err));
+      } else {
+        api
+          .likeCard(id)
+          .then((data) => {
+            cardElement.setLikes(data.likes);
+          })
+          .catch((err) => console.error(err));
+      }
+    },
+  }, 
+   // 
+    selectors.cardTemplate);
 
 
   const newCard = cardElement.getView();
@@ -93,7 +113,10 @@ api.getUserInfo().then((userData) => {
     title: userData.name,
     subtitle: userData.about,
   });
+  user.setAvatarInfo(userData.avatar)
 });
+
+api
 
 // Popup with form New Card Creation
 const newCardPopup = new PopupWithForm({
@@ -134,23 +157,8 @@ editButtonAvatar.addEventListener("click", () => {
 
 deleteModal.setEventListeners();
 
-// handleDeleteClick: () => {
-//   deleteModal.open();
-//   deleteModal.setSubmitAction(() => {
-//     deleteModal.renderLoading(true);
-//     const id = card.getId();
-//     api
-//       .removeCard(id)
-//       .then(() => {
-//         card.handleDeleteIcon();
-//         deleteModal.close();
-//       })
-//       .catch(console.error)
-//       .finally(() => {
-//         deleteModal.renderLoading(false);
-//       });
-//   });
-// },
+
+
 
 
 const avatarImageModal = new PopupWithForm({
@@ -159,7 +167,7 @@ const avatarImageModal = new PopupWithForm({
     api
       .updateUserProfile({avatar: inputValues.link})
       .then((response) => {
-        user.setUserInfo({avatar: response.avatar});
+        user.setUserInfo({title: response.name, subtitle: response.about, avatar: response.avatar});
         avatarImageModal.close();
       })
       .catch(console.error)
@@ -176,15 +184,6 @@ const avatarImageModal = new PopupWithForm({
 
  
 
-
-// const editImageButton = document.querySelector(".profile-image-button");
-// editImageButton.addEventListener("click", () => {
-//   addFormValidator.resetValidation();
-//   avatarModalFormSelector.open();
-  // if (formValidators.hasOwnProperty(avatarModalFormSelector)) {
-  //   [avatarModalFormSelector].resetValidation();
-  // }
-// });
 
 // pop button
 const openEditPopupButton = document.querySelector("#profile-edit-button");
