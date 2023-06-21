@@ -70,6 +70,7 @@ const renderCard = (data) => {
     //possible area of issue 
     handleLikeClick: () => {
       const id = cardElement.getId();
+      console.log()
       if (cardElement.isLiked()) {
         api
           .unLikeCard(id)
@@ -81,6 +82,7 @@ const renderCard = (data) => {
       } else {
         api
           .likeCard(id)
+          console.log(id)
           .then((data) => {
             cardElement.setLikes(data.likes);
           })

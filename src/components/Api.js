@@ -52,7 +52,7 @@ export default class Api {
   }
 
   updateUserInfo(name, about) {
-    return this._request(
+    return fetch(
       "https://around.nomoreparties.co/v1/group-12/users/me",
       {
         method: "GET",
@@ -63,6 +63,7 @@ export default class Api {
         body: JSON.stringify({
           name,
           about,
+
         }),
       }
     );
@@ -112,32 +113,50 @@ return fetch(`https://around.nomoreparties.co/v1/group-12/cards/${cardId}`, {
   }
 
   getLikesCount(cardId) {
-    return this._request(`https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`, {
+    return fetch(`https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`, {
       method: "GET",
       headers: {
         authorization: this._authToken,
         "Content-Type": "application/json",
-      },
+      }
     });
   }
 
   likeCard(cardId) {
-    return this._request(`https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`, {
+    return fetch(`https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`, {
       method: "PUT",
       headers: {
         authorization: this._authToken,
         "Content-Type": "application/json",
       },
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      // if the server returns an error, reject the promise
+      return Promise.reject(`Error: ${res.status}`).catch((err) => {
+        console.error(err); // log the error to the console
+      });
     });
   }
 
   unLikeCard(cardId) {
-    return this._request(`https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`, {
+    return fetch(`https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: {
         authorization: this._authToken,
         "Content-Type": "application/json",
       },
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      // if the server returns an error, reject the promise
+      return Promise.reject(`Error: ${res.status}`).catch((err) => {
+        console.error(err); // log the error to the console
+      });
     });
   }
 
