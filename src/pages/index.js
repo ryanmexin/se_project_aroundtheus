@@ -82,7 +82,6 @@ const renderCard = (data) => {
       } else {
         api
           .likeCard(id)
-          console.log(id)
           .then((data) => {
             cardElement.setLikes(data.likes);
           })

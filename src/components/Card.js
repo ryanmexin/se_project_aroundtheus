@@ -5,7 +5,7 @@ export default class Card {
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
-    this._id = data.id;
+    this._id = data._id;
     this.myId = myId;
     this._handleLikeClick = handleLikeClick;
     this._handleDeleteClick = handleDeleteClick;
@@ -75,6 +75,7 @@ export default class Card {
     this._cardElement.querySelector(".card__image").src = this._link;
     this._cardElement.querySelector(".card__image").alt = this._name;
     this._cardElement.querySelector(".card__title").textContent = this._name;
+    //this._handleLikeIcon();
 
     return this._cardElement;
   }
