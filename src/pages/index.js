@@ -110,9 +110,11 @@ const deleteModal = new PopupWithForm({
 const user = new UserInfo(".profile__title", ".profile__subtitle", ".profile__image");
 
 api.getUserInfo().then((userData) => {
+  console.log(userData)
   user.setUserInfo({
     title: userData.name,
     subtitle: userData.about,
+    id: userData._id
   });
   user.setAvatarInfo(userData.avatar)
 });
