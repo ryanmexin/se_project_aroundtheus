@@ -109,17 +109,35 @@ const deleteModal = new PopupWithForm({
 // User Info
 const user = new UserInfo(".profile__title", ".profile__subtitle", ".profile__image");
 
-api.getUserInfo().then((userData) => {
-  console.log(userData)
-  user.setUserInfo({
-    title: userData.name,
-    subtitle: userData.about,
-    id: userData._id
-  });
-  user.setAvatarInfo(userData.avatar)
-});
+// api.getUserInfo().then((userData) => {
+//   console.log(userData)
+//   user.setUserInfo({
+//     title: userData.name,
+//     subtitle: userData.about,
+//     id: userData._id
+//   });
 
-api
+//   user.setAvatarInfo(userData.avatar)
+// });
+
+Promise.all([api.getUserInfo(), api.getCardList()])
+  .then(([userData, data]) => {
+    user.setUserInfo({
+      title: userData.name,
+      subtitle: userData.about,
+      id: userData._id
+    });
+    user.setAvatarInfo(userData.avatar);
+    data.forEach((card) => {
+      renderCard(card);
+    });
+
+    cardSection.renderItems();
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
 
 // Popup with form New Card Creation
 const newCardPopup = new PopupWithForm({
@@ -227,3 +245,5 @@ addFormValidator.enableValidation();
 const addProfileImageElement = document.querySelector("#profile-change-image")
 const profileImageValidator = new FormValidator(config, addProfileImageElement)
 profileImageValidator.enableValidation();
+
+
