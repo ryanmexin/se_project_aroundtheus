@@ -26,16 +26,17 @@ const api = new Api({
 //pulling in the card data via API
 let cardSection;
 
-api.getCardList().then((res) => {
-   cardSection = new Section(
-  {
-    items: res,
-    renderer: renderCard,
-  },
-  selectors.cardSection
-);
+// api.getCardList().then((res) => {
+//    cardSection = new Section(
+//   {
+//     items: res,
+//     renderer: renderCard,
+//   },
+//   selectors.cardSection
+// );
 
-cardSection.renderItems();});
+// cardSection.renderItems();
+// });
 
 
 // Popup with Image
@@ -131,6 +132,13 @@ Promise.all([api.getUserInfo(), api.getCardList()])
     data.forEach((card) => {
       renderCard(card);
     });
+     cardSection = new Section(
+  {
+    items: res,
+    renderer: renderCard,
+  },
+  selectors.cardSection
+);
 
     cardSection.renderItems();
   })
