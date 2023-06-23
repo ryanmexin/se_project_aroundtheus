@@ -23,20 +23,8 @@ const api = new Api({
   authToken: "cb447498-fb2c-4c99-9fc5-8ee58bc7fe4c",
 });
 
-//pulling in the card data via API
-let cardSection;
 
-// api.getCardList().then((res) => {
-//    cardSection = new Section(
-//   {
-//     items: res,
-//     renderer: renderCard,
-//   },
-//   selectors.cardSection
-// );
 
-// cardSection.renderItems();
-// });
 
 
 // Popup with Image
@@ -44,9 +32,6 @@ const cardPreview = new PopupWithImage({
   popupSelector: "#preview-image-modal",
 });
 cardPreview.setEventListeners();
-
-
-
 
 
 // Section / Card Create Card
@@ -68,7 +53,6 @@ const renderCard = (data) => {
           deleteModal.close();
       })
     },
-    //possible area of issue 
     handleLikeClick: () => {
       const id = cardElement.getId();
       console.log()
@@ -90,8 +74,8 @@ const renderCard = (data) => {
       }
     },
   }, 
-   // 
-    selectors.cardTemplate);
+    selectors.cardTemplate
+  );
 
 
   const newCard = cardElement.getView();
@@ -110,16 +94,8 @@ const deleteModal = new PopupWithForm({
 // User Info
 const user = new UserInfo(".profile__title", ".profile__subtitle", ".profile__image");
 
-// api.getUserInfo().then((userData) => {
-//   console.log(userData)
-//   user.setUserInfo({
-//     title: userData.name,
-//     subtitle: userData.about,
-//     id: userData._id
-//   });
-
-//   user.setAvatarInfo(userData.avatar)
-// });
+//pulling in the card data via API
+let cardSection;
 
 Promise.all([api.getUserInfo(), api.getCardList()])
   .then(([userData, data]) => {
@@ -129,12 +105,9 @@ Promise.all([api.getUserInfo(), api.getCardList()])
       id: userData._id
     });
     user.setAvatarInfo(userData.avatar);
-    data.forEach((card) => {
-      renderCard(card);
-    });
      cardSection = new Section(
   {
-    items: res,
+    items: data,
     renderer: renderCard,
   },
   selectors.cardSection
@@ -153,15 +126,17 @@ const newCardPopup = new PopupWithForm({
   handleFormSubmit: (inputValues) => {
     newCardPopup.renderLoading(true);
     api.addCard(inputValues)
-    //newCardPopup.setLoading(true);
-    //api.addCard(inputValues).then((inputValues) => {
-      //newCardPopup.setLoading(false);
-     loadingText: "Saving...",
+    .then((inputValues) => {
       renderCard(inputValues);
       newCardPopup.close();
-      }
-  },
-);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+    },
+  loadingText: "Saving...",
+});
+
 newCardPopup.setEventListeners();
 
 const editProfileModal = new PopupWithForm({

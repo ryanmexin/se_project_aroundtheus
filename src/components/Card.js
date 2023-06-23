@@ -54,10 +54,7 @@ export default class Card {
       .querySelector(".card__like-button")
       .classList.toggle("card__like-button_active");
   }
-  //   this._cardElement
-  //     .querySelector(".card__like-button")
-  //     .classList.toggle("card__like-button_active");
-  // }
+  
   _handleDeleteButton() {
     this._cardElement.remove();
     this._cardElement = null;
