@@ -17,22 +17,16 @@ import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import Api from "../components/Api.js";
 
-
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   authToken: "cb447498-fb2c-4c99-9fc5-8ee58bc7fe4c",
 });
-
-
-
-
 
 // Popup with Image
 const cardPreview = new PopupWithImage({
   popupSelector: "#preview-image-modal",
 });
 cardPreview.setEventListeners();
-
 
 // Section / Card Create Card
 const renderCard = (data) => {
@@ -46,37 +40,34 @@ const renderCard = (data) => {
       handleDeleteClick: () => {
         deleteModal.open();
         const id = cardElement.getId();
-        api
-        .deleteCard(id)
-        .then(() => {
+        api.deleteCard(id).then(() => {
           cardElement.handleDeleteButton();
           deleteModal.close();
-      })
+        });
+      },
+      handleLikeClick: () => {
+        const id = cardElement.getId();
+        console.log();
+        if (cardElement.isLiked()) {
+          api
+            .unLikeCard(id)
+            .then((data) => {
+              cardElement.setLikes(data.likes);
+            })
+            .catch((err) => console.error(err));
+        } else {
+          api
+            .likeCard(id)
+            .then((data) => {
+              cardElement.setLikes(data.likes);
+            })
+            .catch((err) => console.error(err));
+        }
+      },
+      myId: userId,
     },
-    handleLikeClick: () => {
-      const id = cardElement.getId();
-      console.log()
-      if (cardElement.isLiked()) {
-        api
-          .unLikeCard(id)
-          .then((data) => {
-            cardElement.setLikes(data.likes);
-            
-          })
-          .catch((err) => console.error(err));
-      } else {
-        api
-          .likeCard(id)
-          .then((data) => {
-            cardElement.setLikes(data.likes);
-          })
-          .catch((err) => console.error(err));
-      }
-    },
-  }, 
     selectors.cardTemplate
   );
-
 
   const newCard = cardElement.getView();
   cardSection.addItem(newCard);
@@ -90,28 +81,32 @@ const deleteModal = new PopupWithForm({
   loadingText: "Deleting...",
 });
 
-
 // User Info
-const user = new UserInfo(".profile__title", ".profile__subtitle", ".profile__image");
+const user = new UserInfo(
+  ".profile__title",
+  ".profile__subtitle",
+  ".profile__image"
+);
 
 //pulling in the card data via API
 let cardSection;
+let userId;
 
 Promise.all([api.getUserInfo(), api.getCardList()])
   .then(([userData, data]) => {
     user.setUserInfo({
       title: userData.name,
       subtitle: userData.about,
-      id: userData._id
     });
     user.setAvatarInfo(userData.avatar);
-     cardSection = new Section(
-  {
-    items: data,
-    renderer: renderCard,
-  },
-  selectors.cardSection
-);
+    userId = userData._id;
+    cardSection = new Section(
+      {
+        items: data,
+        renderer: renderCard,
+      },
+      selectors.cardSection
+    );
 
     cardSection.renderItems();
   })
@@ -119,21 +114,21 @@ Promise.all([api.getUserInfo(), api.getCardList()])
     console.error(err);
   });
 
-
 // Popup with form New Card Creation
 const newCardPopup = new PopupWithForm({
   popupSelector: "#add-card-modal",
   handleFormSubmit: (inputValues) => {
     newCardPopup.renderLoading(true);
-    api.addCard(inputValues)
-    .then((inputValues) => {
-      renderCard(inputValues);
-      newCardPopup.close();
+    api
+      .addCard(inputValues)
+      .then((inputValues) => {
+        renderCard(inputValues);
+        newCardPopup.close();
       })
       .catch((err) => {
         console.error(err);
-      })
-    },
+      });
+  },
   loadingText: "Saving...",
 });
 
@@ -146,48 +141,40 @@ const editProfileModal = new PopupWithForm({
     user.setUserInfo(inputValues);
     editProfileModal.close();
   },
-  
 });
 editProfileModal.setEventListeners();
 
-// profile Image 
+// profile Image
 
 editButtonAvatar.addEventListener("click", () => {
   avatarImageModal.open();
   profileImageValidator.resetValidation();
 });
 
-
-
 deleteModal.setEventListeners();
-
-
-
-
 
 const avatarImageModal = new PopupWithForm({
   popupSelector: "#modal-profile-image",
   handleFormSubmit: (inputValues) => {
     api
-      .updateUserProfile({avatar: inputValues.link})
+      .updateUserProfile({ avatar: inputValues.link })
       .then((response) => {
-        user.setUserInfo({title: response.name, subtitle: response.about, avatar: response.avatar});
+        user.setUserInfo({
+          title: response.name,
+          subtitle: response.about,
+          avatar: response.avatar,
+        });
         avatarImageModal.close();
       })
       .catch(console.error)
       .finally(() => {
-       avatarImageModal.renderLoading(false);
-    });
+        avatarImageModal.renderLoading(false);
+      });
   },
   loadingText: "Saving...",
 });
 
-  
-  avatarImageModal.setEventListeners();
-    
-
- 
-
+avatarImageModal.setEventListeners();
 
 // pop button
 const openEditPopupButton = document.querySelector("#profile-edit-button");
@@ -215,7 +202,9 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-const profileImageButton = document.querySelector(".profile__image-edit-button");
+const profileImageButton = document.querySelector(
+  ".profile__image-edit-button"
+);
 
 const profileImageSaveButton = document.querySelector(".modal__button_save");
 const profileImage = document.querySelector("#modal-profile-image");
@@ -225,8 +214,6 @@ editFormValidator.enableValidation();
 const addCardFormElement = document.querySelector("#add-card-form");
 const addFormValidator = new FormValidator(config, addCardFormElement);
 addFormValidator.enableValidation();
-const addProfileImageElement = document.querySelector("#profile-change-image")
-const profileImageValidator = new FormValidator(config, addProfileImageElement)
+const addProfileImageElement = document.querySelector("#profile-change-image");
+const profileImageValidator = new FormValidator(config, addProfileImageElement);
 profileImageValidator.enableValidation();
-
-

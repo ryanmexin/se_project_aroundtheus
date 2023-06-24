@@ -47,7 +47,15 @@ export default class Api {
       body: JSON.stringify({
         name,
         link,
-      }),
+      })
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      // if the server returns an error, reject the promise
+      return Promise.reject(`Error: ${res.status}`).catch((err) => {
+        console.error(err); // log the error to the console
+      });
     });
   }
 

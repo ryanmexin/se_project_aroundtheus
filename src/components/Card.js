@@ -9,7 +9,7 @@ export default class Card {
     this._myId = myId;
     this._handleLikeClick = handleLikeClick;
     this._handleDeleteClick = handleDeleteClick;
-    this._likes = data.likes
+    this._likes = data.likes;
   }
 
   getId() {
@@ -50,9 +50,15 @@ export default class Card {
   }
 
   _handleLikeIcon() {
+    if(this.isLiked()){
+      this._cardElement
+      .querySelector(".card__like-button")
+      .classList.add("card__like-button_active");
+    } else {
     this._cardElement
       .querySelector(".card__like-button")
-      .classList.toggle("card__like-button_active");
+      .classList.remove("card__like-button_active");
+    }
   }
   
   _handleDeleteButton() {
@@ -73,8 +79,8 @@ export default class Card {
     this._cardElement.querySelector(".card__image").src = this._link;
     this._cardElement.querySelector(".card__image").alt = this._name;
     this._cardElement.querySelector(".card__title").textContent = this._name;
-    
-
+    this.updateLikes();
+    this._handleLikeIcon();
     return this._cardElement;
   }
 }
