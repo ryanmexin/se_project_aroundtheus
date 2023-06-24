@@ -23,8 +23,10 @@ export default class Api {
 
   getUserInfo() {
     return fetch("https://around.nomoreparties.co/v1/group-12/users/me", {
-      headers: {
+    method: "GET",  
+    headers: {
         authorization: this._authToken,
+        "Content-Type": "application/json",
       },
     }).then((res) => {
       if (res.ok) {
@@ -63,7 +65,7 @@ export default class Api {
     return fetch(
       "https://around.nomoreparties.co/v1/group-12/users/me",
       {
-        method: "GET",
+        method: "PATCH",
         headers: {
           authorization: this._authToken,
           "Content-Type": "application/json",
@@ -74,8 +76,16 @@ export default class Api {
 
         }),
       }
-    );
-  }
+      ).then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        // if the server returns an error, reject the promise
+        return Promise.reject(`Error: ${res.status}`).catch((err) => {
+          console.error(err); // log the error to the console
+        });
+      });
+    }
 
   updateUserProfile(avatar) {
     return fetch(

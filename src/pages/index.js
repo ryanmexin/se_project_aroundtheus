@@ -39,12 +39,22 @@ const renderCard = (data) => {
       },
       handleDeleteClick: () => {
         deleteModal.open();
+        deleteModal.setSubmitAction(() => {
+        deleteModal.renderLoading(true);
         const id = cardElement.getId();
-        api.deleteCard(id).then(() => {
+        api
+          .deleteCard(id)
+          .then(() => {
           cardElement.handleDeleteButton();
           deleteModal.close();
+        })
+        .catch(console.error)
+        .finally(() => {
+          deleteModal.renderLoading(false);
         });
+      });
       },
+
       handleLikeClick: () => {
         const id = cardElement.getId();
         console.log();

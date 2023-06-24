@@ -66,6 +66,8 @@ export default class Card {
     this._cardElement = null;
   }
 
+  
+
   _getTemplate() {
     return document
       .querySelector(this._cardSelector)
@@ -81,6 +83,7 @@ export default class Card {
     this._cardElement.querySelector(".card__title").textContent = this._name;
     this.updateLikes();
     this._handleLikeIcon();
+    
     return this._cardElement;
   }
 }
