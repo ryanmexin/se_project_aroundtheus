@@ -65,16 +65,16 @@ export default class Card {
     }
   }
   
-  _handleDeleteButton() {
+  handleDeleteButton() {
     this._cardElement.remove();
     this._cardElement = null;
   }
 
-  // handleDeleteButtonIcon() {
-  //   if (this._ownerId !== this._myId) {
-  //     this._element.querySelector(".card__delete-button").remove();
-  //   }
-  // }
+  handleDeleteButtonIcon() {
+    if (this._ownerId !== this._myId) {
+      this._cardElement.querySelector(".card__delete-button").remove();
+    }
+  }
 
 
 
@@ -93,7 +93,7 @@ export default class Card {
     this._cardElement.querySelector(".card__title").textContent = this._name;
     this.updateLikes();
     this._handleLikeIcon();
-    // this.handleDeleteButtonIcon();
+    this.handleDeleteButtonIcon();
     
     return this._cardElement;
   }
