@@ -104,7 +104,6 @@ let userId;
 
 Promise.all([api.getUserInfo(), api.getCardList()])
   .then(([userData, data]) => {
-    console.log(userData)
     user.setUserInfo({
       title: userData.name,
       subtitle: userData.about,
