@@ -104,9 +104,11 @@ let userId;
 
 Promise.all([api.getUserInfo(), api.getCardList()])
   .then(([userData, data]) => {
+    console.log(userData)
     user.setUserInfo({
       title: userData.name,
       subtitle: userData.about,
+      avatar: userData.avatar,
     });
     user.setAvatarInfo(userData.avatar);
     userId = userData._id;
@@ -153,7 +155,10 @@ const editProfileModal = new PopupWithForm({
    .updateUserInfo(inputValues.title, inputValues.subtitle)
    .then((response) => {
      // Assuming the API call is successful
-     user.setUserInfo(response);
+     user.setUserInfo({
+      title: response.name,
+      subtitle: response.about,
+      avatar: response.avatar,});
      editProfileModal.close();
    })
    .catch((error) => {
@@ -166,6 +171,7 @@ const editProfileModal = new PopupWithForm({
      editProfileModal.renderLoading(false);
    });
 },
+loadingText: "Saving...",
 });
 
 editProfileModal.setEventListeners();
@@ -181,6 +187,7 @@ deleteModal.setEventListeners();
 const avatarImageModal = new PopupWithForm({
   popupSelector: "#modal-profile-image",
   handleFormSubmit: (inputValues) => {
+    avatarImageModal.renderLoading(true);
     api
       .updateUserProfile({ avatar: inputValues.link })
       .then((response) => {
