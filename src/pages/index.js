@@ -148,12 +148,27 @@ const editProfileModal = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: (inputValues) => {
     editProfileModal.renderLoading(true);
-    user.setUserInfo(inputValues);
-    editProfileModal.close();
-  },
+   // Make an API call to update the user's profile
+   api
+   .updateUserInfo(inputValues.title, inputValues.subtitle)
+   .then((response) => {
+     // Assuming the API call is successful
+     user.setUserInfo(response);
+     editProfileModal.close();
+   })
+   .catch((error) => {
+     // Handle API call error
+     console.error("Error updating profile:", error);
+     // You can show an error message to the user or handle the error in another way
+   })
+   .finally(() => {
+     // Hide the loading state
+     editProfileModal.renderLoading(false);
+   });
+},
 });
-editProfileModal.setEventListeners();
 
+editProfileModal.setEventListeners();
 // profile Image
 
 editButtonAvatar.addEventListener("click", () => {
