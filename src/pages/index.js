@@ -89,7 +89,7 @@ const renderCard = (data) => {
 
 const deleteModal = new PopupWithConfirmation({
   setConfirmHandler: () => {
-    deleteModal.renderLoading(true);
+    deleteFormValidator.renderLoading(true);
   },
   popupSelector: cardDeleteModal,
   loadingText: "Deleting...",
@@ -255,3 +255,6 @@ addFormValidator.enableValidation();
 const addProfileImageElement = document.querySelector("#profile-change-image");
 const profileImageValidator = new FormValidator(config, addProfileImageElement);
 profileImageValidator.enableValidation();
+const deleteFormElement = document.querySelector("#modal-delete-form")
+const deleteFormValidator = new FormValidator(config, deleteFormElement)
+deleteFormValidator.enableValidation();
