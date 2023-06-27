@@ -21,7 +21,6 @@ import Api from "../utils/Api.js";
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
-  authToken: "cb447498-fb2c-4c99-9fc5-8ee58bc7fe4c",
   headers: {authorization: "cb447498-fb2c-4c99-9fc5-8ee58bc7fe4c",
   "Content-Type": "application/json",
   },
@@ -46,6 +45,7 @@ const renderCard = (data) => {
         deleteModal.open();
         deleteModal.setSubmitAction(() => {
         const id = cardElement.getId();
+        newCardPopup.renderLoading(true);
         api
           .deleteCard(id)
           .then(() => {
@@ -88,9 +88,6 @@ const renderCard = (data) => {
 };
 
 const deleteModal = new PopupWithConfirmation({
-  setConfirmHandler: () => {
-    deleteFormValidator.renderLoading(true);
-  },
   popupSelector: cardDeleteModal,
   loadingText: "Deleting...",
 });

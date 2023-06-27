@@ -23,9 +23,9 @@ export default class Card {
   setLikes(likes) {
     this._likes = likes;
     this._handleLikeIcon();
-    this.updateLikes();
+    this.renderLikes();
   }
-  updateLikes() {
+  renderLikes() {
     this._likesAmount = this._cardElement.querySelector(".card__like-amount");
     this._likesAmount.textContent = this._likes.length;
   };
@@ -88,7 +88,7 @@ export default class Card {
     this._cardElement.querySelector(".card__image").src = this._link;
     this._cardElement.querySelector(".card__image").alt = this._name;
     this._cardElement.querySelector(".card__title").textContent = this._name;
-    this.updateLikes();
+    this.renderLikes();
     this._handleLikeIcon();
     this.handleDeleteButtonIcon();
     
