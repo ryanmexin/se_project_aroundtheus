@@ -8,8 +8,15 @@ export default class PopupWithConfirmation extends Popup {
         this._confirmDeleteButton = this._popupElement.querySelector(
             "#modal-delete-btn"
           );
+        
     }
- 
+    renderLoading(isLoading) {
+      if (isLoading) {
+        this._confirmDeleteButton.textContent = this._loadingText;
+      } else {
+        this._confirmDeleteButton.textContent = this._submitButtonText;
+      }
+    }
     
     
       open() {
