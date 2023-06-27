@@ -30,7 +30,4 @@ export default class Popup {
       .querySelector(".modal__close")
       .addEventListener("click", () => this.close());
   }
-
-
-
 }

@@ -18,11 +18,11 @@ import FormValidator from "../components/FormValidator.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import Api from "../utils/Api.js";
 
-
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
-  headers: {authorization: "cb447498-fb2c-4c99-9fc5-8ee58bc7fe4c",
-  "Content-Type": "application/json",
+  headers: {
+    authorization: "cb447498-fb2c-4c99-9fc5-8ee58bc7fe4c",
+    "Content-Type": "application/json",
   },
 });
 
@@ -42,22 +42,23 @@ const renderCard = (data) => {
         cardPreview.open(imageData);
       },
       handleDeleteClick: () => {
-        deleteModal.open();
         deleteModal.setSubmitAction(() => {
-        const id = cardElement.getId();
-        newCardPopup.renderLoading(true);
-        api
-          .deleteCard(id)
-          .then(() => {
-          cardElement.deleteButton();
-          deleteModal.close();
-        })
-        .catch((err) => {console.error(err);
-        })
-        .finally(() => {
-          deleteModal.renderLoading(false);
+          deleteModal.renderLoading(true);
+          const id = cardElement.getId();
+          api
+            .deleteCard(id)
+            .then(() => {
+              cardElement.deleteButton();
+              deleteModal.close();
+            })
+            .catch((err) => {
+              console.error(err);
+            })
+            .finally(() => {
+              deleteModal.renderLoading(false);
+            });
         });
-      });
+        deleteModal.open();
       },
 
       handleLikeClick: () => {
@@ -153,28 +154,29 @@ const editProfileModal = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: (inputValues) => {
     editProfileModal.renderLoading(true);
-   // Make an API call to update the user's profile
-   api
-   .updateUserInfo(inputValues.title, inputValues.subtitle)
-   .then((response) => {
-     // Assuming the API call is successful
-     user.setUserInfo({
-      title: response.name,
-      subtitle: response.about,
-      avatar: response.avatar,});
-     editProfileModal.close();
-   })
-   .catch((error) => {
-     // Handle API call error
-     console.error("Error updating profile:", error);
-     // You can show an error message to the user or handle the error in another way
-   })
-   .finally(() => {
-     // Hide the loading state
-     editProfileModal.renderLoading(false);
-   });
-},
-loadingText: "Saving...",
+    // Make an API call to update the user's profile
+    api
+      .updateUserInfo(inputValues.title, inputValues.subtitle)
+      .then((response) => {
+        // Assuming the API call is successful
+        user.setUserInfo({
+          title: response.name,
+          subtitle: response.about,
+          avatar: response.avatar,
+        });
+        editProfileModal.close();
+      })
+      .catch((error) => {
+        // Handle API call error
+        console.error("Error updating profile:", error);
+        // You can show an error message to the user or handle the error in another way
+      })
+      .finally(() => {
+        // Hide the loading state
+        editProfileModal.renderLoading(false);
+      });
+  },
+  loadingText: "Saving...",
 });
 
 editProfileModal.setEventListeners();
@@ -252,6 +254,6 @@ addFormValidator.enableValidation();
 const addProfileImageElement = document.querySelector("#profile-change-image");
 const profileImageValidator = new FormValidator(config, addProfileImageElement);
 profileImageValidator.enableValidation();
-const deleteFormElement = document.querySelector("#modal-delete-form")
-const deleteFormValidator = new FormValidator(config, deleteFormElement)
+const deleteFormElement = document.querySelector("#modal-delete-form");
+const deleteFormValidator = new FormValidator(config, deleteFormElement);
 deleteFormValidator.enableValidation();
