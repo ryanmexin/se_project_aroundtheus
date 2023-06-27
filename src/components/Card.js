@@ -11,9 +11,6 @@ export default class Card {
     this._handleDeleteClick = handleDeleteClick;
     this._likes = data.likes;
     this._ownerId = data.owner._id;
-  //  console.log(data._id)
-  //  console.log(myId)
-   console.log(data.owner._id)
   }
 
   getId() {
@@ -65,7 +62,7 @@ export default class Card {
     }
   }
   
-  handleDeleteButton() {
+  deleteButton() {
     this._cardElement.remove();
     this._cardElement = null;
   }

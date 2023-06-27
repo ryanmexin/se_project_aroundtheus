@@ -23,8 +23,6 @@ export default class UserInfo {
     this._profileAvatarElement.src = avatar;
   }
 
-  _setAvatarInfo(avatar){
-    this._profileAvatarElement.src = avatar
-  }
+ 
 
 }

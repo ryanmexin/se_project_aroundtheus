@@ -15,11 +15,16 @@ import {
 } from "../utils/constants.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
-import Api from "../components/Api.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
+import Api from "../utils/Api.js";
+
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   authToken: "cb447498-fb2c-4c99-9fc5-8ee58bc7fe4c",
+  headers: {authorization: "cb447498-fb2c-4c99-9fc5-8ee58bc7fe4c",
+  "Content-Type": "application/json",
+  },
 });
 
 // Popup with Image
@@ -40,15 +45,15 @@ const renderCard = (data) => {
       handleDeleteClick: () => {
         deleteModal.open();
         deleteModal.setSubmitAction(() => {
-        deleteModal.renderLoading(true);
         const id = cardElement.getId();
         api
           .deleteCard(id)
           .then(() => {
-          cardElement.handleDeleteButton();
+          cardElement.deleteButton();
           deleteModal.close();
         })
-        .catch(console.error)
+        .catch((err) => {console.error(err);
+        })
         .finally(() => {
           deleteModal.renderLoading(false);
         });
@@ -57,7 +62,6 @@ const renderCard = (data) => {
 
       handleLikeClick: () => {
         const id = cardElement.getId();
-        console.log();
         if (cardElement.isLiked()) {
           api
             .unLikeCard(id)
@@ -83,8 +87,8 @@ const renderCard = (data) => {
   cardSection.addItem(newCard);
 };
 
-const deleteModal = new PopupWithForm({
-  handleFormSubmit: () => {
+const deleteModal = new PopupWithConfirmation({
+  setConfirmHandler: () => {
     deleteModal.renderLoading(true);
   },
   popupSelector: cardDeleteModal,
@@ -107,7 +111,6 @@ Promise.all([api.getUserInfo(), api.getCardList()])
     user.setUserInfo({
       title: userData.name,
       subtitle: userData.about,
-      avatar: userData.avatar,
     });
     user.setAvatarInfo(userData.avatar);
     userId = userData._id;
@@ -138,6 +141,10 @@ const newCardPopup = new PopupWithForm({
       })
       .catch((err) => {
         console.error(err);
+      })
+      .finally(() => {
+        // Hide the loading state
+        editProfileModal.renderLoading(false);
       });
   },
   loadingText: "Saving...",
@@ -188,7 +195,7 @@ const avatarImageModal = new PopupWithForm({
   handleFormSubmit: (inputValues) => {
     avatarImageModal.renderLoading(true);
     api
-      .updateUserProfile({ avatar: inputValues.link })
+      .updateAvatar({ avatar: inputValues.link })
       .then((response) => {
         user.setUserInfo({
           title: response.name,

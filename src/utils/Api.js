@@ -1,15 +1,25 @@
 export default class Api {
-  constructor({ baseURL, authToken }) {
-    this._baseURL = baseURL;
-    this._authToken = authToken;
+  constructor({ baseUrl, headers }) {
+    this._baseUrl = baseUrl;
+    this._headers = headers;
   }
+
+  // _checkResponse(res) {
+  //   if (res.ok) {
+  //     return res.json();
+  //   }
+  //   return Promise.reject(`Error: ${res.status}`);
+  // }
+
+  // _request(url, options) {
+  //   console.log(url)
+  //   return fetch(url, options).then(this._checkResponse);
+  // }
 
   // GET https://around.nomoreparties.co/
   getCardList() {
-    return fetch("https://around.nomoreparties.co/v1/group-12/cards", {
-      headers: {
-        authorization: this._authToken,
-      },
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers,
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -22,12 +32,9 @@ export default class Api {
   }
 
   getUserInfo() {
-    return fetch("https://around.nomoreparties.co/v1/group-12/users/me", {
+    return fetch(`${this._baseUrl}/users/me`, {
     method: "GET",  
-    headers: {
-        authorization: this._authToken,
-        "Content-Type": "application/json",
-      },
+    headers: this._headers
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -40,12 +47,9 @@ export default class Api {
   }
 
   addCard({ name, link }) {
-    return fetch("https://around.nomoreparties.co/v1/group-12/cards", {
+    return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: {
-        authorization: this._authToken,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name,
         link,
@@ -63,13 +67,10 @@ export default class Api {
 
   updateUserInfo(name, about) {
     return fetch(
-      "https://around.nomoreparties.co/v1/group-12/users/me",
+      `${this._baseUrl}/users/me`,
       {
         method: "PATCH",
-        headers: {
-          authorization: this._authToken,
-          "Content-Type": "application/json",
-        },
+        headers: this._headers,
         body: JSON.stringify({
           name,
           about,
@@ -87,15 +88,12 @@ export default class Api {
       });
     }
 
-  updateUserProfile(avatar) {
+  updateAvatar(avatar) {
     return fetch(
-      "https://around.nomoreparties.co/v1/group-12/users/me/avatar",
+      `${this._baseUrl}/users/me/avatar`,
       {
         method: "PATCH",
-        headers: {
-          authorization: this._authToken,
-          "Content-Type": "application/json",
-        },
+        headers: this._headers,
         body: JSON.stringify({
           avatar: avatar.avatar,
         }),
@@ -112,12 +110,9 @@ export default class Api {
   }
 
 deleteCard(cardId){
-return fetch(`https://around.nomoreparties.co/v1/group-12/cards/${cardId}`, {
+return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-      headers: {
-        authorization: this._authToken,
-        "Content-Type": "application/json",
-      }
+      headers: this._headers,
     })
     .then((res) => {
       if (res.ok) {
@@ -130,23 +125,10 @@ return fetch(`https://around.nomoreparties.co/v1/group-12/cards/${cardId}`, {
     });
   }
 
-  getLikesCount(cardId) {
-    return fetch(`https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`, {
-      method: "GET",
-      headers: {
-        authorization: this._authToken,
-        "Content-Type": "application/json",
-      }
-    });
-  }
-
   likeCard(cardId) {
-    return fetch(`https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
-      headers: {
-        authorization: this._authToken,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers
     })
     .then((res) => {
       if (res.ok) {
@@ -160,12 +142,9 @@ return fetch(`https://around.nomoreparties.co/v1/group-12/cards/${cardId}`, {
   }
 
   unLikeCard(cardId) {
-    return fetch(`https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
-      headers: {
-        authorization: this._authToken,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
     })
     .then((res) => {
       if (res.ok) {
