@@ -106,7 +106,6 @@ let userId;
 
 Promise.all([api.getUserInfo(), api.getCardList()])
   .then(([userData, data]) => {
-    console.log
     user.setUserInfo({
       title: userData.name,
       subtitle: userData.about,
@@ -143,7 +142,7 @@ const newCardPopup = new PopupWithForm({
       })
       .finally(() => {
         // Hide the loading state
-        editProfileModal.renderLoading(false);
+        newCardPopup.renderLoading(false);
       });
   },
   loadingText: "Saving...",
@@ -197,11 +196,7 @@ const avatarImageModal = new PopupWithForm({
     api
       .updateAvatar({ avatar: inputValues.link })
       .then((response) => {
-        user.setAvatarInfo({
-          title: response.name,
-          subtitle: response.about,
-          avatar: response.avatar,
-        });
+        user.setAvatarInfo(response.avatar);
         avatarImageModal.close();
       })
       .catch(console.error)
