@@ -48,7 +48,7 @@ const renderCard = (data) => {
           api
             .deleteCard(id)
             .then(() => {
-              cardElement.deleteButton();
+              cardElement.deleteCard();
               deleteModal.close();
             })
             .catch((err) => {
@@ -106,6 +106,7 @@ let userId;
 
 Promise.all([api.getUserInfo(), api.getCardList()])
   .then(([userData, data]) => {
+    console.log
     user.setUserInfo({
       title: userData.name,
       subtitle: userData.about,
@@ -196,7 +197,7 @@ const avatarImageModal = new PopupWithForm({
     api
       .updateAvatar({ avatar: inputValues.link })
       .then((response) => {
-        user.setUserInfo({
+        user.setAvatarInfo({
           title: response.name,
           subtitle: response.about,
           avatar: response.avatar,
